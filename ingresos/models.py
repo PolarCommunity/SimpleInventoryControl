@@ -14,7 +14,7 @@ class Ingreso(models.Model):
 
 class DetalleIngreso(models.Model):
     cantidad = models.DecimalField(max_digits=15, decimal_places=2)
-    ingreso = models.ForeignKey(Ingreso)
-    articulo = models.ForeignKey(Articulo)
+    ingreso = models.ForeignKey(Ingreso, on_delete=models.CASCADE)
+    articulo = models.ForeignKey(Articulo, on_delete=models.CASCADE)
     def __str__(self):
         return self.ingreso.comprobante
