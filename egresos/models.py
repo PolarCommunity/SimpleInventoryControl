@@ -5,8 +5,8 @@ from general.models import Articulo
 
 # Create your models here.
 class Egreso(models.Model):
-    fecha = models.DateField(default = today)
-    descripcion = models.CharField(max_lenght=150)
+    fecha = models.DateField(default = date.today)
+    descripcion = models.CharField(max_length=150)
     user = models.ForeignKey(User)
     def __str__(self):
         try:
@@ -17,7 +17,7 @@ class Egreso(models.Model):
 
 class DetalleEgreso(models.Model):
     cantidad = models.DecimalField(max_digits=15, decimal_places=2)
-    egreso = models.ForeignKey(Egresos)
+    egreso = models.ForeignKey(Egreso)
     articulo = models.ForeignKey(Articulo)
     def __str__(self):
         try:

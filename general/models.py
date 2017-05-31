@@ -5,14 +5,14 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Articulo(models.Model):
-    codigo = models.CharField(max_lenght=15, unique = True)
-    nombre = models.CharField(max_lenght=150)
+    codigo = models.CharField(max_length=15, unique = True)
+    nombre = models.CharField(max_length=150)
     cantidad = models.DecimalField(max_digits = 12, decimal_places = 2)
     def __str__(self):
         return self.nombre
 
 class DescripcionArticulo(models.Model):
-    descripcion = models.CharField(max_lenght=254)
+    descripcion = models.CharField(max_length=254)
     articulo = models.OneToOneField(Articulo)
 
 class Sede(models.Model):
