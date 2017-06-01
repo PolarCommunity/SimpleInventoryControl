@@ -54,6 +54,7 @@ def Logout(request):
 
 @login_required
 def lista_sede(request):
+    print("hola")
     if request.user.is_superuser:
         try:
             sede = Sede.objects.all()
