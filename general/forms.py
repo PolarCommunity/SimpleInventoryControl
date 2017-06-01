@@ -17,6 +17,7 @@ class CrearSedeForm(ModelForm):
         self.helper.add_input(Submit('submit', 'Guardar'))
 
 class CrearArticuloForm(ModelForm):
+    descripcion = forms.CharField(label="Descripción", required=False)
     class Meta:
         model = Articulo
         fields = '__all__'
