@@ -2,19 +2,21 @@
 {% block container %}
 {% load humanize %}
 {% load static %}
-<form class="form-horizontal">
+<form class="form-horizontal" method="post">
   <fieldset>
     <legend>Ingreso de Usuarios</legend>
     <div class="form-group">
       <label for="inputEmail" class="col-lg-2 control-label">Nombre de Usuario</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="inputNombredeusuario" placeholder="Nombre de Usuario">
+        {% csrf_token %}
+        <input type="text" class="form-control" id="inputNombredeusuario" placeholder="Nombre de Usuario" name="username">
       </div>
     </div>
     <div class="form-group">
       <label for="inputPassword" class="col-lg-2 control-label">Contraseña</label>
       <div class="col-lg-10">
-        <input type="password" class="form-control" id="inputPassword" placeholder="Contrasena">
+        {% csrf_token %}
+        <input type="password" class="form-control" id="inputPassword" placeholder="Contrasena" name="password">
         </div>
         </div>
 

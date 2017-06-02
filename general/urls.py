@@ -4,6 +4,7 @@ from .views import *
 urlpatterns = [
     url(r'^sede/usuario/lista/(?P<pk>\d+)$', lista_sede_usuario_super, name ="lista_sede_usuario_super"),
     url(r'^sede/lista/$', lista_sede.as_view(), name ="lista_sede"),
+    url(r'^sede/lista/([\w-]+)$', lista_sede.as_view(), name ="lista_sede"),
     url(r'^sede/crear/$', crear_sede, name ="crear_sede"),
     url(r'^sede/actualizar/(?P<pk>\d+)$', actualizar_sede, name ="actualizar_sede"),
     url(r'^sede/detalle/(?P<pk>\d+)$', detalle_sede.as_view(), name ="detalle_sede"),
@@ -21,6 +22,8 @@ urlpatterns = [
 
 
     url(r'^usuario/lista/$', lista_usuario.as_view(), name ="lista_usuario"),
+    url(r'^usuario/lista/([\w-]+)$', lista_usuario.as_view(), name ="lista_usuario"),
+    url(r'^usuario/eliminar/(?P<pk>\d+)$', eliminar_usuario, name ="eliminar_usuario"),
     url(r'^usuario/$', Register, name ="Register"),
     url(r'^cerrar/$', Logout, name ="Logout"),
     url(r'^', Home, name ="Home"),

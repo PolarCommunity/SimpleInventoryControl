@@ -27,7 +27,9 @@ def Register(request):
             email = request.POST["email"]
             auth.models.User.objects.create_user(username, email, password).save()
             user = User.objects.get(username=request.POST['username'])
-            print(user.username)
+            user.first_name=request.POST['nombres']
+            user.last_name=request.POST['apellidos']
+            user.save()
             SedeUsuario.objects.create(user=user, sede=Sede.objects.get(pk=int(request.POST['sede'])))
             mensaje = "Usuario creado exitoamente"
             return render(request, "usuario/register.html", {'mensaje':mensaje, 'sede':sede})
@@ -35,6 +37,7 @@ def Register(request):
         return render(request, 'no_permitido.html')
 
 def Home(request):
+    sedes = Sede.objects.all()
     if request.user.is_authenticated:
         return render(request, "home.html")
     else:
@@ -70,8 +73,8 @@ class lista_usuario(LoginRequiredMixin, ListView):
     template_name = 'general/usuario/lista_sede_usuario.html'
     def get_queryset(self):
         try:
-            return User.objects.filter(Q(username__icontains=self.args[0]) | Q(first_name__icontains=self.args[0]) | Q(last_name__icontains=self.args[0]) | Q(sede__nombre__icontains=self.args[0])).order_by('username')
-        except:
+            return User.objects.filter(Q(username__icontains=self.args[0]) | Q(first_name__icontains=self.args[0]) | Q(last_name__icontains=self.args[0])).order_by('username')
+        except Exception as e:
             return super(lista_usuario, self).get_queryset().order_by('username')
 
 class lista_sede(LoginRequiredMixin, ListView):
@@ -81,8 +84,9 @@ class lista_sede(LoginRequiredMixin, ListView):
     template_name = 'general/sede/lista_sede.html'
     def get_queryset(self):
         try:
-            return Articulo.objects.filter(Q(nombre__icontains=self.args[0]) | Q(direccion__icontains=self.args[0])).order_by('nombre')
-        except:
+            return Sede.objects.filter(Q(nombre__icontains=self.args[0]) | Q(direccion__icontains=self.args[0])).order_by('nombre')
+        except Exception as e:
+            print(e)
             return super(lista_sede, self).get_queryset().order_by('nombre')
 
 @login_required
@@ -114,6 +118,15 @@ def actualizar_sede(request, pk):
             return render(request, 'general/sede/sede_form.html', {'form':form})
     else:
         return render(request, 'no_permitido.html')
+
+@login_required
+def eliminar_usuario(request, pk):
+    if request.user.is_superuser:
+        user = get_object_or_404(User, pk=pk)
+        user.delete()
+        return redirect(reverse('lista_usuario'))
+    else:
+        return render(request, 'no_permitido')
 
 class detalle_sede(LoginRequiredMixin, DetailView):
     model = Sede
