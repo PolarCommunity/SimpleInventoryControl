@@ -1,0 +1,41 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block container %}
+<div class="jumbotron">
+  <h1>Quienes Somos?</h1>
+  <p>Todo lo relacionado a la electrónica.</p>
+  <p><a class="btn btn-primary btn-lg">Añadir Usuarios</a></p>
+</div>
+
+	<div class="panel-body clearfix">
+    <!-- LINKED NAV -->
+    <div class="col-xs-12">
+        <ol class="carousel-linked-nav pagination">
+            <li class=""><a href="#1">4</a></li>
+            <li class=""><a href="#2">3</a></li>
+            <li class=""><a href="#3">2</a></li>
+            <li class=""><a href="#4">1</a></li>
+        </ol>
+    </div>
+    <div id="myCarousel" class="carousel slide">
+        <!-- Carousel items -->
+        <div class="carousel-inner">
+            <div class="item">
+                <a href="#">
+                    <img alt="hola" class=" img-responsive " src="<?= IMG . '4.jpg' ?>">
+                </a>
+            </div>
+            <div class="item">
+                <a href="#">
+                    <img alt="hola" class=" img-responsive " src="<?= IMG . '3.jpg' ?>">
+                </a>
+            </div>
+
+
+        </div>
+        <!-- Carousel nav -->
+        <a class="carousel-control left" href="#myCarousel" data-slide="prev">‹</a>
+        <a class="carousel-control right" href="#myCarousel" data-slide="next">›</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+{% block container %}
+{% load humanize %}
+{% load static %}
+<form class="form-horizontal">
+  <fieldset>
+    <legend>Ingreso de Usuarios</legend>
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Nombre de Usuario</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="inputNombredeusuario" placeholder="Nombre de Usuario">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword" class="col-lg-2 control-label">Contraseña</label>
+      <div class="col-lg-10">
+        <input type="password" class="form-control" id="inputPassword" placeholder="Contrasena">
+        </div>
+        </div>
+
+        <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="reset" class="btn btn-default">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Ingresar</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+{% endblock %}

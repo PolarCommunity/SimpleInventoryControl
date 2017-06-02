@@ -6,7 +6,7 @@
 
 
 
-    <body>
+<body>
     <style >
     	body {
  	 background-image: url ("{% static 'img/logo_elca.jpg'%}");
@@ -17,99 +17,20 @@
 
 
 </head>
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Navegacion</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">ELCA</a>
-    </div>
+{% include 'nav-var.html'%}
+<div class="row">
+  <div class="col-md-1">
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Mas <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Inventario</a></li>
-            <li><a href="#">Ingreso de Productos</a></li>
-            <li><a href="#">Egreso de Prouductos</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Usuariosk</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Buscar">
-        </div>
-        <button type="submit" class="btn btn-default">Buscar</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Ingreso</a></li>
-      </ul>
-    </div>
   </div>
-</nav>
-
-
-	<div class="btn-group btn-group-justified">
-  <a href="#" class="btn btn-default">Inventario</a>
-  <a href="#" class="btn btn-default">Ingresos</a>
-  <a href="#" class="btn btn-default">Egresos</a>
+  <div class="col-md-10">
+    {% block container %}
+    {% endblock %}
+  </div>
 </div>
-
-
-	<div class="jumbotron">
-  <h1>Quienes Somos?</h1>
-  <p>Todo lo relacionado a la electrónica.</p>
-  <p><a class="btn btn-primary btn-lg">Añadir Usuarios</a></p>
-</div>
-
-	<div class="panel-body clearfix">
-    <!-- LINKED NAV -->
-    <div class="col-xs-12">
-        <ol class="carousel-linked-nav pagination">
-            <li class=""><a href="#1">4</a></li>
-            <li class=""><a href="#2">3</a></li>
-            <li class=""><a href="#3">2</a></li>
-            <li class=""><a href="#4">1</a></li>
-        </ol>
-    </div>
-    <div id="myCarousel" class="carousel slide">
-        <!-- Carousel items -->
-        <div class="carousel-inner">
-            <div class="item">
-                <a href="#">
-                    <img alt="hola" class=" img-responsive " src="<?= IMG . '4.jpg' ?>">
-                </a>
-            </div>
-            <div class="item">
-                <a href="#">
-                    <img alt="hola" class=" img-responsive " src="<?= IMG . '3.jpg' ?>">
-                </a>
-            </div>
-
-
-        </div>
-        <!-- Carousel nav -->
-        <a class="carousel-control left" href="#myCarousel" data-slide="prev">‹</a>
-        <a class="carousel-control right" href="#myCarousel" data-slide="next">›</a>
-    </div>
-</div>
+<br>
 
 	<div class="panel panel-default">
     <center class="footer">Contacto: 4938 1977  |  8 Avenida 5-13 zona 1, chiquimula, Chiquimula |  ortegavaliente@hotmail.com </center>
   	</div>
-
-
-
 	</body>
-
 </html>

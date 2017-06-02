@@ -1,1 +1,28 @@
-este es el formulario de articulo
+{% extends 'base.html' %}
+{% load static %}
+{% block container %}
+{% load crispy_forms_tags %}
+<div class="row">
+  <div class="col-md-6">
+    <h3>Artículo</h3>
+  </div>
+  <div class="col-md-6" align="right">
+    <br>
+    <a  href="{% url 'lista_articulo'%}"<span class="glyphicon glyphicon-arrow-left"> Regresar </a>
+  </div>
+</div>
+  <div class="row">
+    <hr>
+    <div class="col-md-1">
+
+    </div>
+    <div class="col-md-10">
+    <form method="post">
+      {% csrf_token %}
+      {% crispy form %}
+    </form>
+  </div>
+  </div>
+  <script type="text/javascript" src="{% static "js/espacioboton.js"%}"></script>
+
+{% endblock %}
