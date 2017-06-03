@@ -222,3 +222,8 @@ def seleccion_sede_lista_articulo(request):
     if request.user.is_superuser:
         sede = Sede.objects.all()
         return render(request, 'general/articulo/seleccion_sede_lista_articulo.html', {'sede':sede})
+
+@login_required
+def imp_inventario_sede(request):
+        lista = ArticuloSede.objects.filter(sede=request.user.sedeusuario.sede)
+        return render(request, 'general/impresion/lista_sede_articulo.html', {'object_list':lista})

@@ -19,6 +19,8 @@ urlpatterns = [
 
     url(r'^articulo/sede/lista/(?P<pk>\d+)$', lista_sede_articulo_super, name ="lista_sede_articulo_super"),
     url(r'^articulo/sede/lista/$', lista_sede_articulo, name ="lista_sede_articulo"),
+    url(r'^articulo/sede/impresion/$', imp_inventario_sede, name ="imp_inventario_sede"),
+
 
 
     url(r'^usuario/lista/$', lista_usuario.as_view(), name ="lista_usuario"),
