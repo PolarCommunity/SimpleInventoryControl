@@ -23,4 +23,4 @@ class DetalleEgreso(models.Model):
     egreso = models.ForeignKey(Egreso, on_delete=models.CASCADE)
     total = models.DecimalField(max_digits=15, decimal_places=2, default=0)
     def __str__(self):
-        return self.articulo
+        return str(self.articulo.nombre)

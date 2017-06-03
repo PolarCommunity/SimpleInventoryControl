@@ -10,7 +10,8 @@ class Articulo(models.Model):
     cantidad = models.DecimalField(max_digits = 12, decimal_places = 2, default=0)
     precio = models.DecimalField(max_digits = 12, decimal_places = 2, default=0)
     def __str__(self):
-        return (self.codigo + " - " + self.nombre)
+        string=str(self.codigo) + " - " + str(self.nombre)
+        return string
 
 class DescripcionArticulo(models.Model):
     descripcion = models.CharField(max_length=254)
@@ -36,7 +37,7 @@ class SedeUsuario(models.Model):
     user = models.OneToOneField(User)
     sede = models.ForeignKey(Sede, on_delete=models.CASCADE)
     def __str__(self):
-        usr = self.sede.nombre + self.user.username
+        usr = str(self.sede.nombre) + " - " + str(self.user.username)
         return usr
 
 class TransferenciaArticuloSede(models.Model):
@@ -45,11 +46,11 @@ class TransferenciaArticuloSede(models.Model):
     sede_destino = models.ForeignKey(Sede, related_name='Sede_de_Destino')
     descripcion = models.CharField(max_length=254)
     def __str__(self):
-        return str(self.fecha) + " - " + str(self.sede_destino__nombre) + " - " + self.descripcion
+        return str(self.fecha) + " - " + str(self.sede_destino.nombre) + " - " + str(self.descripcion)
 
 class DetalleTransferenciaArticuloSede(models.Model):
     transferencia = models.ForeignKey(TransferenciaArticuloSede)
     articulo = models.ForeignKey(ArticuloSede)
     cantidad = models.DecimalField(max_digits=12, decimal_places=2)
     def __str__(self):
-        return str(self.transferencia.pk) + " - " + str(self.articulo.nombre)
+        return str(self.transferencia.pk) + " - " + str(self.articulo.articulo.nombre)
