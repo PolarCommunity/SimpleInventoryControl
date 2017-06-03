@@ -49,7 +49,7 @@ def Home(request):
             user = auth.authenticate(username=username, password=password)
             if user is not None:
                 if user.is_active:
-                    auth.login(request, user)   
+                    auth.login(request, user)
                     next = "/home"
                     if "next" in request.GET:
                         next = request.GET["next"]
