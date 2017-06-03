@@ -25,6 +25,9 @@ urlpatterns = [
 
     url(r'^transferencia/sedes/lista/(?P<par>\w+)$', lista_transferencia, name ="lista_transferencia"),
     url(r'^transferencia/sedes/lista/$', lista_transferencia, name ="lista_transferencia"),
+
+    url(r'^transferencia/sedes/impresion/(?P<pk>\d+)$', imp_transferencia, name ="imp_transferencia"),
+
     url(r'^transferencia/sedes/crear/$', crear_transferencia_articulo_sede, name ="crear_transferencia_articulo_sede"),
     url(r'^transferencia/sedes/detalle/crear/(?P<pk>\w+)$', crear_detalle_transferencia_articulo_sede, name ="crear_detalle_transferencia_articulo_sede"),
 

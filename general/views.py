@@ -301,3 +301,12 @@ def imp_inventario(request):
         if mensaje:
             return redirect(reverse('lista_articulo'))
         return render(request, 'general/impresion/lista_articulo.html', {'object_list':lista})
+
+@login_required
+def imp_transferencia(request,pk):
+        transferencia = TransferenciaArticuloSede.objects.get(pk=pk)
+        detalle = DetalleTransferenciaArticuloSede.objects.filter(transferencia=transferencia.pk)
+        mensaje = request.GET.get('mensaje', None)
+        if mensaje:
+            return redirect(reverse('lista_transferencia'))
+        return render(request, 'general/impresion/lista_transferencia.html', {'transferencia':transferencia,'lista':detalle})

@@ -9,15 +9,8 @@
       <h1>Transferencia</h1>
     </div>
     <div class="col-md-6" align="right">
-      {% if request.user.is_superuser %}
-          <a href="{% url 'lista_egreso_super'%}" class="btn btn-primary" style="background-color: #f21202"><span class="glyphicon glyphicon-arrow-left"></span> Regresar</a>
-
-
-        {% else %}
-        <a href="{% url 'lista_egreso_sede'%}" class="btn btn-primary" style="background-color: #f21202"><span class="glyphicon glyphicon-arrow-left"></span> Regresar</a>
-
-
-          {% endif %}
+          <a href="{% url 'lista_transferencia'%}" class="btn btn-primary" style="background-color: #f21202"><span class="glyphicon glyphicon-arrow-left"></span> Regresar</a>
+          <a href="{% url 'imp_transferencia' transferencia.pk%}" class="btn btn-primary" style="background-color: #f21202"><span class="glyphicon glyphicon-print"></span> Imprimir</a>
     </div>
   </div>
   <hr>

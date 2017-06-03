@@ -1,0 +1,69 @@
+{% load static %}
+{% load humanize %}
+<head>
+  {% include 'impresioneshead.html' %}
+</head>
+
+<div class="row">
+  <div class="col-md-12">
+    <h3 id="title">Transferencia #{{transferencia.pk}}</h3>
+  </div>
+</div>
+<br>
+<div id="offset">
+
+  <div class="row">
+  <div class="col-md-6">
+    <h4>Transferencia No: {{transferencia.pk}}</h4>
+    <h4>Fecha: {{transferencia.fecha}}</h4>
+    <h4>Descripcion: {{transferencia.descripcion}}</h4>
+  </div>
+  <div class="col-md-6">
+    <h4>Sede Origen: {{transferencia.sede_origen}}</h4>
+    <h4>Sede Destino: {{transferencia.sede_destino}}</h4>
+  </div>
+  </div>
+  <hr>
+
+<table class="table table-striped table-hover">
+<thead>
+  <tr>
+    <th >#</th>
+    <th>Codigo</th>
+    <th>Nombre</th>
+    <th>Cantidad</th>
+    <th>Precio Unitario</th>
+  </tr>
+</thead>
+<tbody>
+  {% for i in lista %}
+  <tr>
+  <td>{{ forloop.counter }}</td>
+  <td>{{i.articulo.articulo.codigo}}</td>
+  <td>{{i.articulo.articulo.nombre}}</td>
+  <td>{{i.cantidad}}</td>
+  <td>Q. {{i.articulo.articulo.precio|intcomma}}</td>
+  </tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+
+<div id="footer">
+  <div class="col-md-6">
+    <p>F.______________</p>
+    <p>Entrega</p>
+    <p>{{user.username}}</p>
+  </div>
+  <div class="col-md-6">
+    <p>F.______________</p>
+    <p>Recibido</p>
+  </div>
+
+</div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    console.log("pendejo");
+    impresion();
+});
+</script>
