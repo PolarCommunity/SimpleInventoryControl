@@ -1,4 +1,4 @@
-from django.c    list_filter = ('user','fecha')
+from django.contrib import admin
 ontrib import admin
 from .models import *
 # Register your models here.
