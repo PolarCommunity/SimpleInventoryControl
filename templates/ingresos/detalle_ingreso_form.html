@@ -27,25 +27,20 @@
     </div>
 
 </div>
-{%if mensaje%}
-  <hr>
-  {%if status == 1%}
-    <div class="alert alert-warning" role="alert">
-        {{mensaje}}
-    </div>
-  {%else%}
-    <div class="alert alert-danger" role="alert">
-        {{mensaje}}
-    </div>
-  {%endif%}
-{%endif%}
+
 <hr>
 <div>
   <form method="post">
     {% csrf_token %}
     {%crispy form%}
-
+    {% if mensaje %}
+    <div align="center">
+      <br>
+      <h4>{{mensaje}}</h4>
+    </div>
+    {% else %}
     <p style="color:black">.</p>
+    {% endif %}
   </form>
 </div>
 

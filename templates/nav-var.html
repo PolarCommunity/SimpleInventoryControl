@@ -10,10 +10,9 @@
       </button>
       <a class="navbar-brand" href="{% url 'Home'%}" style="background-color: #f21202"><img src="{%static  'img/logo_elca.jpg'%}"></a>
     </div>
-
+{% if request.user.is_authenticated%}
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -54,5 +53,7 @@
        </ul>
     </div>
 {% endif %}
+{% endif %}
+
 </div>
 </nav>
