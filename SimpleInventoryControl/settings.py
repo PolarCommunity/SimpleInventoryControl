@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'egresos',
     'general',
     'ingresos',
+    'import_export',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
