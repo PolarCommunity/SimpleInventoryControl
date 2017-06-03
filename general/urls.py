@@ -11,6 +11,7 @@ urlpatterns = [
 
 
     url(r'^articulo/lista/$', lista_articulo.as_view(), name ="lista_articulo"),
+    url(r'^articulo/lista/impresion/$', imp_inventario, name ="imp_inventario"),
     url(r'^articulo/lista/([\w-]+)$', lista_articulo.as_view(), name ="lista_articulo"),
     url(r'^articulo/crear/$', crear_articulo, name ="crear_articulo"),
     url(r'^articulo/actualizar/(?P<pk>\d+)$', actualizar_articulo, name ="actualizar_articulo"),

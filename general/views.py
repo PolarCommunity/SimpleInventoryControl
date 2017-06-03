@@ -226,4 +226,15 @@ def seleccion_sede_lista_articulo(request):
 @login_required
 def imp_inventario_sede(request):
         lista = ArticuloSede.objects.filter(sede=request.user.sedeusuario.sede)
+        mensaje = request.GET.get('mensaje', None)
+        if mensaje:
+            return redirect(reverse('lista_sede_articulo'))
         return render(request, 'general/impresion/lista_sede_articulo.html', {'object_list':lista})
+
+@login_required
+def imp_inventario(request):
+        lista = Articulo.objects.all()
+        mensaje = request.GET.get('mensaje', None)
+        if mensaje:
+            return redirect(reverse('lista_articulo'))
+        return render(request, 'general/impresion/lista_articulo.html', {'object_list':lista})

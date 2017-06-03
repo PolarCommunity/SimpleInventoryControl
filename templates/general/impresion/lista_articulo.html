@@ -6,13 +6,14 @@
 
 <div class="row">
   <div class="col-md-12">
-    <h3 id="title">Inventario sede: {{request.user.sedeusuario.sede.nombre}}</h3>
+    <h3 id="title">Inventario General</h3>
   </div>
+
 </div>
 <hr>
 <br>
 
-<div id="offset" class="col-md-12">
+<div id="offset">
 
 <table id="table" class="table table-striped table-hover">
   <thead>
@@ -28,16 +29,15 @@
     {% for i in object_list %}
     <tr>
       <td id="table">{{ forloop.counter }}</td>
-      <td id="table">{{i.articulo.codigo}}</td>
-      <td id="table">{{i.articulo.nombre}}</td>
+      <td id="table">{{i.codigo}}</td>
+      <td id="table">{{i.nombre}}</td>
       <td id="table">{{i.cantidad}}</td>
-      <td id="table">Q. {{i.articulo.precio|intcomma}}</td>
+      <td id="table">Q. {{i.precio|intcomma}}</td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
 </div>
-
 <script type="text/javascript">
   $(document).ready(function(){
     console.log("pendejo");
