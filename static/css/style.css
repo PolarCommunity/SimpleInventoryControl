@@ -55,10 +55,23 @@
 @brand-danger:          #E74C3C;
 
 
-.jumbotron h1{
-
+.container{
+    font-family:  "Times New Roman", Georgia, Serif;
+    font-style: italic;
+    padding: 70px 25px;
 }
-
+.container:hover{
+box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+#si{
+color: white;
+font-size: 100px;
+font-family:  "Times New Roman", Georgia, Serif;
+}
+#jjs{
+  font-family:  "Times New Roman", Georgia, Serif;
+  color: black;
+}
 
 #buttons:hover{
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
