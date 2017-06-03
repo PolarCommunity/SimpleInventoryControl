@@ -18,7 +18,7 @@ class Egreso(models.Model):
         return retorno
 
 class DetalleEgreso(models.Model):
-    articulo = models.ForeignKey(Articulo, on_delete=models.CASCADE)
+    articulo = models.ForeignKey(ArticuloSede, on_delete=models.CASCADE)
     cantidad = models.DecimalField(max_digits=15, decimal_places=2)
     egreso = models.ForeignKey(Egreso, on_delete=models.CASCADE)
     total = models.DecimalField(max_digits=15, decimal_places=2, default=0)

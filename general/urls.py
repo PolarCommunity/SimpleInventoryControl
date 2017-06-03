@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^articulo/lista/([\w-]+)$', lista_articulo.as_view(), name ="lista_articulo"),
     url(r'^articulo/crear/$', crear_articulo, name ="crear_articulo"),
     url(r'^articulo/actualizar/(?P<pk>\d+)$', actualizar_articulo, name ="actualizar_articulo"),
+    url(r'^articulo/ver/super/(?P<pk>\d+)$', detalle_articulo_super.as_view(), name ="detalle_articulo_super"),
     url(r'^articulo/ver/(?P<pk>\d+)$', detalle_articulo.as_view(), name ="detalle_articulo"),
     url(r'^articulo/sede/lista/seleccion/$', seleccion_sede_lista_articulo, name="seleccion_sede_lista_articulo"),
 

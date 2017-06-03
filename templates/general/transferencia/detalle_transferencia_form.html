@@ -49,6 +49,9 @@
     <th>Nombre</th>
     <th>Cantidad</th>
     <th>Precio Unitario</th>
+    {% if form %}
+    <th>Eliminar</th>
+    {% endif %}
   </tr>
 </thead>
 <tbody>
@@ -59,7 +62,9 @@
   <td>{{i.articulo.articulo.nombre}}</td>
   <td>{{i.cantidad}}</td>
   <td>Q. {{i.articulo.articulo.precio|intcomma}}</td>
+  {% if form %}
   <td><a class="confirm-delete"  href="{% url 'eliminar_detalle_transferencia' i.pk%}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+  {% endif %}
   </tr>
 {% endfor %}
 </tbody>

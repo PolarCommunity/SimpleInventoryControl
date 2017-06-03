@@ -143,8 +143,12 @@ class lista_articulo(LoginRequiredMixin, ListView):
             return super(lista_articulo, self).get_queryset().order_by('nombre')
 
 class detalle_articulo(LoginRequiredMixin, DetailView):
-    model = Articulo
+    model = ArticuloSede
     template_name = 'general/articulo/detalle_articulo.html'
+
+class detalle_articulo_super(LoginRequiredMixin, DetailView):
+    model = Articulo
+    template_name = 'general/articulo/detalle_articulo_super.html'
 
 @login_required
 def crear_articulo(request):
@@ -314,8 +318,7 @@ def ver_detalle_transferencia(request, pk):
     try:
         lista = DetalleTransferenciaArticuloSede.objects.filter(transferencia=transferencia)
     except Exception as e:
-        lista = False 
-
+        lista = False
     return render(request, 'general/transferencia/detalle_transferencia_form.html', {'transferencia':transferencia, 'lista':lista})
 
 @login_required

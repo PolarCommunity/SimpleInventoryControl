@@ -59,11 +59,21 @@ def crear_detalle_egreso(request, pk):
     try:
         lista = DetalleEgreso.objects.filter(egreso=pk)
     except Exception as e:
-        print(e)
         lista = False
     if request.method == 'POST':
         form = CrearDetalleEgresoForm(request.POST)
-        articulosede = ArticuloSede.objects.get(articulo = int(request.POST['articulo']))
+        try:
+            for i in lista:
+                if i.articulo.pk == int(request.POST['articulo']):
+                    mensaje = "Ya ha ingresado este artículo"
+                    form = CrearDetalleEgresoForm(initial = {'egreso':pk})
+                    form.fields['egreso'].widget = forms.HiddenInput()
+                    form.fields['total'].widget = forms.HiddenInput()
+                    form.fields['articulo'].queryset = ArticuloSede.objects.filter(sede=Sede.objects.get(pk=request.user.sedeusuario.sede.pk))
+                    return render(request, 'egreso/detalle_egreso_form.html', {'form':form, 'mensaje':mensaje, 'lista':lista, 'egreso':instance})
+        except Exception as e:
+            raise
+        articulosede = ArticuloSede.objects.get(pk = int(request.POST['articulo']))
         articulo = Articulo.objects.get(pk=int(request.POST['articulo']))
         if form.is_valid():
             if Decimal(request.POST['cantidad']) > articulosede.cantidad:
@@ -71,6 +81,7 @@ def crear_detalle_egreso(request, pk):
                 form = CrearDetalleEgresoForm(initial = {'egreso':pk})
                 form.fields['egreso'].widget = forms.HiddenInput()
                 form.fields['total'].widget = forms.HiddenInput()
+                form.fields['articulo'].queryset = ArticuloSede.objects.filter(sede=Sede.objects.get(pk=request.user.sedeusuario.sede.pk))
                 return render(request, 'egreso/detalle_egreso_form.html', {'form':form, 'mensaje':mensaje, 'lista':lista, 'egreso':instance})
             detalle = form.save()
             detalle.total = detalle.cantidad * detalle.articulo.articulo.precio
@@ -87,6 +98,7 @@ def crear_detalle_egreso(request, pk):
         form = CrearDetalleEgresoForm(initial = {'egreso':pk})
         form.fields['egreso'].widget = forms.HiddenInput()
         form.fields['total'].widget = forms.HiddenInput()
+        form.fields['articulo'].queryset = ArticuloSede.objects.filter(sede=Sede.objects.get(pk=request.user.sedeusuario.sede.pk))
         return render(request, 'egreso/detalle_egreso_form.html', {'form':form, 'lista':lista, 'egreso':instance})
 
 @login_required
@@ -98,3 +110,16 @@ def ver_egreso(request, pk):
         print(e)
         lista = False
     return render(request, 'egreso/detalle_egreso_form.html', {'lista':lista, 'egreso':egreso})
+
+@login_required
+def eliminar_detalle_egreso(request, pk):
+    detalle = get_object_or_404(DetalleEgreso, pk=pk)
+    egreso = Egreso.objects.get(pk=detalle.egreso.pk)
+    articulo_aumentar = ArticuloSede.objects.get(pk = detalle.articulo.pk)
+    articulo_general = Articulo.objects.get(pk = detalle.articulo.articulo.pk)
+    articulo_aumentar.cantidad += detalle.cantidad
+    articulo_general.cantidad += detalle.cantidad
+    articulo_aumentar.save()
+    articulo_general.save()
+    detalle.delete()
+    return redirect(reverse('crear_detalle_egreso', args={egreso.pk}))
