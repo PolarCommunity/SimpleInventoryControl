@@ -10,35 +10,27 @@
 </div>
 </div>
 
-	<div class="panel-body clearfix">
-    <!-- LINKED NAV -->
-    <div class="col-xs-12">
-        <ol class="carousel-linked-nav pagination">
-            <li class=""><a href="#1">4</a></li>
-            <li class=""><a href="#2">3</a></li>
-            <li class=""><a href="#3">2</a></li>
-            <li class=""><a href="#4">1</a></li>
-        </ol>
-    </div>
-    <div id="myCarousel" class="carousel slide">
-        <!-- Carousel items -->
-        <div class="carousel-inner">
-            <div class="item">
-                <a href="#">
-                    <img alt="hola" class=" img-responsive " src="<?= IMG . '4.jpg' ?>">
-                </a>
-            </div>
-            <div class="item">
-                <a href="#">
-                    <img alt="hola" class=" img-responsive " src="<?= IMG . '3.jpg' ?>">
-                </a>
-            </div>
+	<nav aria-label="page navigation">
+      <center>
+        <ul class="pagination" class="breadcrumb" id="cent">
+          <li class="page-item"><a class="page-link" class="active" id="pagi" href="#">Antes</a></li>
 
+      <!--  <li class="page-item"><a class="page-link" id="pagi" href="#" class="glyphicon glyphicon-wrench">
+              <img src="{%static 'img/msp_1607_8389.jpg'%}">Herramientas
+            </a></li>
+          <li class="page-item"><a class="page-link" id="pagi" href="#" class="glyphicon glyphicon-scale">
+              <img src="{%static 'img/compon.jpg'%}">Componentes
+              </a></li>
+          <li class="page-item"><a class="page-link" id="pagi" href="#" class="glyphicon glyphicon-dashboard">
+              <img src="{%static 'img/matprima.jpg'%}"> Materiales
+              </a></li>
+          <li class="page-item"><a class="page-link" id="pagi"  href="#" class="glyphicon glyphicon-tasks">
+              <img alt="hola" src="{%static 'img/otros.jpg'%}">Otros
+              </a></li>-->
 
-        </div>
-        <!-- Carousel nav -->
-        <a class="carousel-control left" href="#myCarousel" data-slide="prev">‹</a>
-        <a class="carousel-control right" href="#myCarousel" data-slide="next">›</a>
-    </div>
-</div>
+          <li class="page-item"><a class="page-link" id="pagi" href="#">Siguiente</a></li>
+        </ul>
+
+      </center>
+      </nav>
 {% endblock %}

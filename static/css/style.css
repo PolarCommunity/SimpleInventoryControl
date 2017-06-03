@@ -125,6 +125,11 @@ img {
   color: black;
 }
 
+#menbtn{
+  font-family:  "Times New Roman", Georgia, Serif;
+  color: white;
+}
+
 .col-md-6 h3{
   font-family:  "Times New Roman", Georgia, Serif;
 }
@@ -133,26 +138,15 @@ img {
   font-family:  "Times New Roman", Georgia, Serif;
 }
 
-.carousel-indicators li{
-   border: none;
-   background-color: #ffff00;
-}
-.carousel-indicators li.active{
-   border: none;
-   background-color: #ffff00;
-}
-#myCarousel {
-   margin-top: 10px;
-}
-.carousel-linked-nav, .item img {
-   display: inline;
-   margin: 0 auto;
-}
-.carousel-linked-nav {
-   width: 120px;
-   margin-bottom: 20px;
+#pagi{
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    font-family:  "Times New Roman", Georgia, Serif;
+    border-radius: 200px;
+
 }
 
-.navbar navbar-default{
-	background-color: #ad0000;
+#cent{
+  position: relative;
 }
