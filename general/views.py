@@ -49,7 +49,7 @@ def Home(request):
             user = auth.authenticate(username=username, password=password)
             if user is not None:
                 if user.is_active:
-                    auth.login(request, user)   
+                    auth.login(request, user)
                     next = "/home"
                     if "next" in request.GET:
                         next = request.GET["next"]
@@ -86,7 +86,6 @@ class lista_sede(LoginRequiredMixin, ListView):
         try:
             return Sede.objects.filter(Q(nombre__icontains=self.args[0]) | Q(direccion__icontains=self.args[0])).order_by('nombre')
         except Exception as e:
-            print(e)
             return super(lista_sede, self).get_queryset().order_by('nombre')
 
 @login_required
@@ -213,3 +212,9 @@ def lista_sede_usuario_super(request, pk):
         return render(request, 'general/usuarios/lista_sede_usuario.html', {'lista':lista})
     else:
         return render(request, 'no_permitido.html')
+
+@login_required
+def seleccion_sede_lista_articulo(request):
+    if request.user.is_superuser:
+        sede = Sede.objects.all()
+        return render(request, 'general/articulo/seleccion_sede_lista_articulo.html', {'sede':sede})
