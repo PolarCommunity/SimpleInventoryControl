@@ -20,4 +20,4 @@ class DetalleIngreso(models.Model):
     ingreso = models.ForeignKey(Ingreso, on_delete=models.CASCADE)
     articulo = models.ForeignKey(Articulo, on_delete=models.CASCADE)
     def __str__(self):
-        return self.ingreso.articulo
+        return self.ingreso.comprobante
