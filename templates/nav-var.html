@@ -37,7 +37,11 @@
 <a href="{% url 'lista_egreso_sede'%}" class="btn btn-default" id="menubtn" style="background-color: #ffe900">Egresos</a>
 {% endif %}
 <a href="{%url 'lista_transferencia'%}" class="btn btn-default" id="menubtn" style="background-color: #ffe900">Transferencias</a>
+{% if request.user.is_superuser%}
+
 <a href="{%url 'ListaIngreso'%}" class="btn btn-default" id="menubtn" style="background-color: #ffe900">Ingresos</a>
+{% endif %}
+
 {% if request.user.is_superuser%}
     <div class="btn-group">
       <a href="#" class="btn btn-default dropdown-toggle" id="menubtn" id="dropdow" data-toggle="dropdown" style="background-color: #ffe900">

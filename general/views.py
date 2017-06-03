@@ -22,17 +22,22 @@ def Register(request):
         if request.method == "GET":
             return render(request, 'usuario/register.html', {'sede':sede})
         elif request.method == "POST":
-            username = request.POST["username"]
-            password = request.POST["password"]
-            email = request.POST["email"]
-            auth.models.User.objects.create_user(username, email, password).save()
-            user = User.objects.get(username=request.POST['username'])
-            user.first_name=request.POST['nombres']
-            user.last_name=request.POST['apellidos']
-            user.save()
-            SedeUsuario.objects.create(user=user, sede=Sede.objects.get(pk=int(request.POST['sede'])))
-            mensaje = "Usuario creado exitoamente"
-            return render(request, "usuario/register.html", {'mensaje':mensaje, 'sede':sede})
+            try:
+                username = request.POST["username"]
+                password = request.POST["password"]
+                email = request.POST["email"]
+                auth.models.User.objects.create_user(username, email, password).save()
+                user = User.objects.get(username=request.POST['username'])
+                user.first_name=request.POST['nombres']
+                user.last_name=request.POST['apellidos']
+                user.save()
+                SedeUsuario.objects.create(user=user, sede=Sede.objects.get(pk=int(request.POST['sede'])))
+                mensaje = "Usuario creado exitoamente"
+                return render(request, "usuario/register.html", {'mensaje':mensaje, 'sede':sede})
+            except:
+                return render(request, 'usuario/register.html', {'sede':sede})
+
+
     else:
         return render(request, 'no_permitido.html')
 
