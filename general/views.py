@@ -265,22 +265,23 @@ def crear_detalle_transferencia_articulo_sede(request, pk):
                 mensaje = "No cuenta con la cantidad suficiente de este artículo"
                 form.fields['transferencia'].widget = forms.HiddenInput()
                 return render(request, 'general/transferencia/detalle_transferencia_form.html', {'form':form, 'transferencia':transferencia, 'lista':lista, 'mensaje':mensaje})
+            detalle = form.save()
             try:
                 sede_articulo_aumentar = ArticuloSede.objects.get(articulo=articulo, sede=Sede.objects.get(pk=transferencia.sede_destino.pk))
                 sede_articulo_aumentar.cantidad += detalle.cantidad
                 sede_articulo_aumentar.save()
             except Exception as e:
-                sede_articulo_aumentar = ArticuloSede.objects.create(cantidad=Decimal(request.POST['cantidad']), articulo=articulo, sede=Sede.objects.get(pk=request.POST['sede_destino']))
-            detalle = form.save()
-            detalle.total = detalle.cantidad * detalle.articulo.precio
+                print(articulo.nombre)
+                try:
+                    sede_articulo_aumentar = ArticuloSede.objects.create(cantidad=Decimal(request.POST['cantidad']), articulo=articulo, sede=Sede.objects.get(pk=transferencia.sede_destino))
+                except Exception as e:
+                    print(e)
             sede_articulo.cantidad -= detalle.cantidad
             sede_articulo.save()
             return HttpResponseRedirect(reverse('crear_detalle_transferencia_articulo_sede', args={pk}))
     else:
         form = CrearDetalleTransferenciaForm(initial = {'transferencia':transferencia})
         form.fields['transferencia'].widget = forms.HiddenInput()
-        form.fields['total'].widget = forms.HiddenInput()
-
         form.fields['articulo'].queryset = ArticuloSede.objects.filter(sede=Sede.objects.get(pk=transferencia.sede_origen.pk))
         return render(request, 'general/transferencia/detalle_transferencia_form.html', {'form':form, 'transferencia':transferencia, 'lista':lista})
 
