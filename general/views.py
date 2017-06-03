@@ -222,3 +222,25 @@ def seleccion_sede_lista_articulo(request):
     if request.user.is_superuser:
         sede = Sede.objects.all()
         return render(request, 'general/articulo/seleccion_sede_lista_articulo.html', {'sede':sede})
+
+class ListaTransferencia(LoginRequiredMixin, ListView):
+    model = TransferenciaArticuloSede
+    paginate_by = 50
+    template_name = 'general/transferencia/lista_transferencia.html'
+    def get_queryset(self):
+        try:
+            return Articulo.objects.filter(Q(sede_destino__nombre__icontains=self.args[0]) | Q(descripcion__icontains=self.args[0]), sede_origen=self.user.sedeusuario.sede).order_by('-pk')
+        except Exception as e:
+            return super(ListaTransferencia, self).get_queryset().order_by('-pk')
+
+@login_required
+def transferencia_articulo_sede(request):
+    if request.method == 'POST':
+        form = CrearTransferenciaForm(request.POST)
+        if form.is_valid():
+            tr = form.save()
+            return HttpResponseRedirect(reverse('lista_transferencia'))
+    else:
+        form = CrearTransferenciaForm(initial={'sede_origen':request.user.sedeusuario.sede})
+        form.fields['sede_origen'].widget = forms.HiddenInput()
+        return render(request, 'general')

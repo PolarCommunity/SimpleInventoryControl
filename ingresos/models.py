@@ -14,10 +14,10 @@ class Ingreso(models.Model):
         return self.comprobante
 
 class DetalleIngreso(models.Model):
-    cantidad = models.IntegerField()
-    precio_unitario = models.DecimalField(max_digits = 12, decimal_places = 2, default=0)
     precio_total = models.DecimalField(max_digits = 12, decimal_places = 2, default=0)
     ingreso = models.ForeignKey(Ingreso, on_delete=models.CASCADE)
     articulo = models.ForeignKey(Articulo, on_delete=models.CASCADE)
+    cantidad = models.IntegerField()
+    precio_unitario = models.DecimalField(max_digits = 12, decimal_places = 2, default=0)
     def __str__(self):
         return self.ingreso.articulo

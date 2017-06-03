@@ -20,6 +20,8 @@ urlpatterns = [
     url(r'^articulo/sede/lista/(?P<pk>\d+)$', lista_sede_articulo_super, name ="lista_sede_articulo_super"),
     url(r'^articulo/sede/lista/$', lista_sede_articulo, name ="lista_sede_articulo"),
 
+    url(r'^transferencia/sedes/lista/$', ListaTransferencia.as_view(), name ="ListaTransferencia"),
+
 
     url(r'^usuario/lista/$', lista_usuario.as_view(), name ="lista_usuario"),
     url(r'^usuario/lista/([\w-]+)$', lista_usuario.as_view(), name ="lista_usuario"),

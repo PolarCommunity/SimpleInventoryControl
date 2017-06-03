@@ -20,12 +20,24 @@ class lista_egreso_sede(LoginRequiredMixin, ListView):
     paginate_by = 50
     login_url = settings.LOGIN_URL
     template_name = 'egreso/egreso_sede_lista.html'
+    def get_queryset(self):
+        try:
+            return Egreso.objects.filter(descripcion__icontains=self.args[0]).order_by('-pk')
+        except Exception as e:
+            print(e)
+            return super(lista_egreso_sede, self).get_queryset().order_by('-pk')
 
 class lista_egreso_super(LoginRequiredMixin, ListView):
     model = Egreso
     paginate_by = 50
     login_url = settings.LOGIN_URL
     template_name = 'egreso/egreso_super_lista.html'
+    def get_queryset(self):
+        try:
+            return Egreso.objects.filter(descripcion__icontains=self.args[0]).order_by('-pk')
+        except Exception as e:
+            print(e)
+            return super(lista_egreso_super, self).get_queryset().order_by('-pk')
 
 @login_required
 def crear_egreso(request):
@@ -76,3 +88,13 @@ def crear_detalle_egreso(request, pk):
         form.fields['egreso'].widget = forms.HiddenInput()
         form.fields['total'].widget = forms.HiddenInput()
         return render(request, 'egreso/detalle_egreso_form.html', {'form':form, 'lista':lista, 'egreso':instance})
+
+@login_required
+def ver_egreso(request, pk):
+    egreso = get_object_or_404(Egreso, pk=pk)
+    try:
+        lista = DetalleEgreso.objects.filter(egreso=pk)
+    except Exception as e:
+        print(e)
+        lista = False
+    return render(request, 'egreso/detalle_egreso_form.html', {'lista':lista, 'egreso':egreso})

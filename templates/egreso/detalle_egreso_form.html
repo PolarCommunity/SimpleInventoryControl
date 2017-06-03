@@ -9,7 +9,11 @@
       <h1>Egreso</h1>
     </div>
     <div class="col-md-6" align="right">
+      {% if request.user.is_superuser %}
+      <a  href="{% url 'lista_egreso_super'%}"><span class="glyphicon glyphicon-arrow-left"> Regresar </a>
+        {% else %}
         <a  href="{% url 'lista_egreso_sede'%}"><span class="glyphicon glyphicon-arrow-left"> Regresar </a>
+          {% endif %}
     </div>
   </div>
   <hr>

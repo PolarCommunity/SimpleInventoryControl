@@ -38,3 +38,18 @@ class SedeUsuario(models.Model):
     def __str__(self):
         usr = self.sede.nombre + self.user.username
         return usr
+
+class TransferenciaArticuloSede(models.Model):
+    fecha = models.DateField(default = date.today)
+    sede_origen = models.ForeignKey(Sede, related_name='Sede_de_Origen')
+    sede_destino = models.ForeignKey(Sede, related_name='Sede_de_Destino')
+    descripcion = models.CharField(max_length=254)
+    def __str__(self):
+        return str(self.fecha) + " - " + str(self.sede_destino__nombre) + " - " + self.descripcion
+
+class DetalleTransferenciaArticuloSede(models.Model):
+    transferencia = models.ForeignKey(TransferenciaArticuloSede)
+    articulo = models.ForeignKey(ArticuloSede)
+    cantidad = models.DecimalField(max_digits=12, decimal_places=2)
+    def __str__(self):
+        return str(self.transferencia.pk) + " - " + str(self.articulo.nombre)

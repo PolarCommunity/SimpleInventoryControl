@@ -4,11 +4,11 @@
 {% load humanize %}
 <div class="row">
   <div class="col-md-6">
-    <h3>Egreso</h3>
+    <h3>Inventario {{request.user.sedeusuario.sede.nombre}}</h3>
   </div>
   <div class="col-md-6" align="right">
     <br>
-    <a href="{% url 'crear_egreso'%}" class="btn btn-default">Nuevo Egreso</a>
+    <a href="{% url 'crear_articulo'%}" class="btn btn-default">Nuevo Artículo</a>
   </div>
 </div>
 <hr>
@@ -16,7 +16,7 @@
 <br>
 {% if not object_list %}
 <div align="center">
-  <h4>No se ha registrado ningún egreso aún</h4>
+  <h4>No se ha registrado ninguna transferncia aun</h4>
 </div>
 {% else %}
 <table class="table table-striped table-hover">
@@ -24,24 +24,21 @@
     <tr>
       <th >#</th>
       <th>Fecha</th>
+      <th>Sede Origen</th>
+      <th>Sede Destino</th>
       <th>Descripcion</th>
-      <th>Usuario</th>
-      <th>Precio</th>
       <th>Ver</th>
     </tr>
   </thead>
   <tbody>
     {% for i in object_list %}
-    {% if i.sede.pk == request.user.sedeusuario.sede.pk%}
     <tr>
       <td>{{ forloop.counter }}</td>
       <td>{{i.fecha}}</td>
-      <td>{{i.descripcion}}</td>
-      <td>{{i.user.username}}</td>
-      <td>Q. {{i.total|intcomma}}</td>
-      <td><a  href="{% url 'ver_egreso' i.pk%}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a></td>
+      <td>{{i.sede_origen}}</td>
+      <td>{{i.sede_destino}}</td>
+      <td>Q. {{i.descripcion}}</td>
     </tr>
-    {% endif %}
     {% endfor %}
   </tbody>
 </table>

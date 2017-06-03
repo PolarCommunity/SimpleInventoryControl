@@ -27,7 +27,6 @@
       <th>Usuario</th>
       <th>Precio</th>
       <th>Ver</th>
-      <th>Modificar</th>
     </tr>
   </thead>
   <tbody>
@@ -38,8 +37,7 @@
       <td>{{i.descripcion}}</td>
       <td>{{i.user.username}}</td>
       <td>Q. {{i.total|intcomma}}</td>
-      <td><a  href="#"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a></td>
-      <td><a  href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
+      <td><a  href="{% url 'ver_egreso' i.pk%}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a></td>
     </tr>
     {% endfor %}
   </tbody>
