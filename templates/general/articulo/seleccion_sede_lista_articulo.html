@@ -14,10 +14,8 @@
   </div>
 </div>
 
-
-<a href="#" id="buttons" class="btn btn-primary btn-lg" style="background-color: #ffcc00"><img src="{%static  'img/logo_elca.jpg'%}">Sede Central</a>
-<a href="#" id="buttons" class="btn btn-primary btn-lg" style="background-color: #ffcc00"><img src="{%static  'img/logo_elca.jpg'%}">Sede Calvario</a>
-<a href="#" id="buttons" class="btn btn-primary btn-lg" style="background-color:  #ffcc00"><img src="{%static  'img/logo_elca.jpg'%}">Sede Zacapa</a>
-<a href="#" id="buttons" class="btn btn-primary btn-lg" style="background-color:  #ffcc00"><img src="{%static  'img/logo_elca.jpg'%}">Sede Esquipulas</a>
+{% for i in sede%}
+<a href="{% url 'lista_sede_articulo_super' i.pk%}" id="buttons" class="btn btn-primary btn-lg" style="background-color: #ffcc00"><img src="{%static  'img/logo_elca.jpg'%}">Sede {{i.nombre}}</a>
+{% endfor %}
 
  {%endblock%}

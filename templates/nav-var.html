@@ -32,8 +32,12 @@
   {% else %}
 <a href="{% url 'lista_sede_articulo'%}" id="menubtn" class="btn btn-default" style="background-color: #ffcc00">Inventario</a>
   {% endif %}
-<a href="#" class="btn btn-default" id="menubtn" style="background-color: #ffcc00">Ingresos</a>
-<a href="#" class="btn btn-default" id="menubtn" style="background-color: #ffcc00">Egresos</a>
+{% if request.user.is_superuser%}
+<a href="{% url 'lista_egreso_super'%}" class="btn btn-default" id="menubtn" style="background-color: #ffcc00">Egresos</a>
+{% else%}
+<a href="{% url 'lista_egreso_sede'%}" class="btn btn-default" id="menubtn" style="background-color: #ffcc00">Egresos</a>
+{% endif %}
+<a href="{%url 'ListaIngreso'%}" class="btn btn-default" id="menubtn" style="background-color: #ffcc00">Ingresos</a>
 {% if request.user.is_superuser%}
     <div class="btn-group">
       <a href="#" class="btn btn-default dropdown-toggle" id="menubtn" id="dropdow" data-toggle="dropdown" style="background-color: #ffcc00">
