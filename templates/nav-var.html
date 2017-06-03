@@ -36,21 +36,17 @@
 {% else%}
 <a href="{% url 'lista_egreso_sede'%}" class="btn btn-default" id="menubtn" style="background-color: #ffe900">Egresos</a>
 {% endif %}
-<<<<<<< HEAD
-<a href="{%url 'lista_transferencia'%}" class="btn btn-default" id="menubtn" style="background-color: #ffcc00">Transferencias</a>
-<a href="{%url 'ListaIngreso'%}" class="btn btn-default" id="menubtn" style="background-color: #ffcc00">Ingresos</a>
-=======
+<a href="{%url 'lista_transferencia'%}" class="btn btn-default" id="menubtn" style="background-color: #ffe900">Transferencias</a>
 <a href="{%url 'ListaIngreso'%}" class="btn btn-default" id="menubtn" style="background-color: #ffe900">Ingresos</a>
->>>>>>> master
 {% if request.user.is_superuser%}
     <div class="btn-group">
-      <a href="#" class="btn btn-default dropdown-toggle" id="menubtn" id="dropdow" data-toggle="dropdown" style="background-color: #ffcc00">
+      <a href="#" class="btn btn-default dropdown-toggle" id="menubtn" id="dropdow" data-toggle="dropdown" style="background-color: #ffe900">
         Administrativo
         <span class="caret"></span>
       </a>
       <ul class="dropdown-menu">
-        <li><a href="{% url 'lista_sede'%}" id="menubtn" style="background-color: #b30000">Sedes</a></li>
-        <li><a href="{% url 'lista_usuario'%}" id="menubtn" style="background-color: #b30000">Usuarios</a></li>
+        <li><a href="{% url 'lista_sede'%}" id="menubtn" style="color: #FFFFFF">Sedes</a></li>
+        <li><a href="{% url 'lista_usuario'%}" id="menubtn" style="color: #FFFFFF">Usuarios</a></li>
        </ul>
     </div>
 {% endif %}
