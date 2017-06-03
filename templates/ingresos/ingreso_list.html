@@ -17,7 +17,9 @@
 
 {% if not object_list %}
 {%include 'buscador.html'%}
-<h3>Ningun ingreso registrado aun</h3>
+<div align="center">
+  <h4>No se ha registrado ningún egreso aún</h4>
+</div>
 {% else %}
 {%include 'buscador.html'%}
 <br>
@@ -46,7 +48,6 @@
 </tbody>
 </table>
 {% endif %}
-<hr>
 {%include 'paginate.html'%}
 
 {% endblock %}
