@@ -1,5 +1,4 @@
 from django.contrib import admin
-ontrib import admin
 from .models import *
 # Register your models here.
 class DescripsionArticuloAdmin(admin.TabularInline):
