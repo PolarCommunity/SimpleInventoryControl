@@ -223,27 +223,67 @@ def seleccion_sede_lista_articulo(request):
         sede = Sede.objects.all()
         return render(request, 'general/articulo/seleccion_sede_lista_articulo.html', {'sede':sede})
 
-class ListaTransferencia(LoginRequiredMixin, ListView):
-    model = TransferenciaArticuloSede
-    paginate_by = 50
-    template_name = 'general/transferencia/lista_transferencia.html'
-    def get_queryset(self):
-        try:
-            return Articulo.objects.filter(Q(sede_destino__nombre__icontains=self.args[0]) | Q(descripcion__icontains=self.args[0]), sede_origen=self.user.sedeusuario.sede).order_by('-pk')
-        except Exception as e:
-            return super(ListaTransferencia, self).get_queryset().order_by('-pk')
+@login_required
+def lista_transferencia(request, par=""):
+    print(par)
+    try:
+        lista = TransferenciaArticuloSede.objects.filter(Q(sede_destino__nombre__icontains=par) | Q(descripcion__icontains=par), sede_origen=request.user.sedeusuario.sede).order_by('-pk')
+    except Exception as e:
+        lista = TransferenciaArticuloSede.objects.filter(sede_origen=request.user.sedeusuario.sede).order_by('-pk')
+    return render(request, 'general/transferencia/lista_transferencia.html', {'object_list':lista})
 
 @login_required
-def transferencia_articulo_sede(request):
+def crear_transferencia_articulo_sede(request):
     if request.method == 'POST':
         form = CrearTransferenciaForm(request.POST)
+        if request.POST['sede_origen'] == request.POST['sede_destino']:
+            form = CrearTransferenciaForm(initial={'sede_origen':request.user.sedeusuario.sede})
+            form.fields['sede_origen'].widget = forms.HiddenInput()
+            mensaje = "No puede realizar una transferencia a su propia sede"
+            return render(request, 'general/transferencia/transferencia_form.html', {'form':form, 'mensaje':mensaje})
         if form.is_valid():
             tr = form.save()
-            return HttpResponseRedirect(reverse('lista_transferencia'))
+            return HttpResponseRedirect(reverse('crear_detalle_transferencia_articulo_sede', args={tr.pk}))
     else:
         form = CrearTransferenciaForm(initial={'sede_origen':request.user.sedeusuario.sede})
         form.fields['sede_origen'].widget = forms.HiddenInput()
-        return render(request, 'general')
+        return render(request, 'general/transferencia/transferencia_form.html', {'form':form})
+
+@login_required
+def crear_detalle_transferencia_articulo_sede(request, pk):
+    transferencia = get_object_or_404(TransferenciaArticuloSede, pk=pk)
+    try:
+        lista = DetalleTransferenciaArticuloSede.objects.filter(transferencia=transferencia)
+    except Exception as e:
+        lista=False
+    if request.method == "POST":
+        form = CrearDetalleTransferenciaForm(request.POST)
+        sede_articulo = ArticuloSede.objects.get(pk=request.POST['articulo'])
+        articulo = Articulo.objects.get(pk=sede_articulo.articulo.pk)
+        if form.is_valid():
+            if int(request.POST['cantidad']) > sede_articulo.cantidad:
+                mensaje = "No cuenta con la cantidad suficiente de este artículo"
+                form.fields['transferencia'].widget = forms.HiddenInput()
+                return render(request, 'general/transferencia/detalle_transferencia_form.html', {'form':form, 'transferencia':transferencia, 'lista':lista, 'mensaje':mensaje})
+            try:
+                sede_articulo_aumentar = ArticuloSede.objects.get(articulo=articulo, sede=Sede.objects.get(pk=transferencia.sede_destino.pk))
+                sede_articulo_aumentar.cantidad += detalle.cantidad
+                sede_articulo_aumentar.save()
+            except Exception as e:
+                sede_articulo_aumentar = ArticuloSede.objects.create(cantidad=Decimal(request.POST['cantidad']), articulo=articulo, sede=Sede.objects.get(pk=request.POST['sede_destino']))
+            detalle = form.save()
+            detalle.total = detalle.cantidad * detalle.articulo.precio
+            sede_articulo.cantidad -= detalle.cantidad
+            sede_articulo.save()
+            return HttpResponseRedirect(reverse('crear_detalle_transferencia_articulo_sede', args={pk}))
+    else:
+        form = CrearDetalleTransferenciaForm(initial = {'transferencia':transferencia})
+        form.fields['transferencia'].widget = forms.HiddenInput()
+        form.fields['total'].widget = forms.HiddenInput()
+
+        form.fields['articulo'].queryset = ArticuloSede.objects.filter(sede=Sede.objects.get(pk=transferencia.sede_origen.pk))
+        return render(request, 'general/transferencia/detalle_transferencia_form.html', {'form':form, 'transferencia':transferencia, 'lista':lista})
+
 
 @login_required
 def imp_inventario_sede(request):

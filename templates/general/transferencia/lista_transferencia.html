@@ -4,11 +4,12 @@
 {% load humanize %}
 <div class="row">
   <div class="col-md-6">
-    <h3>Inventario {{request.user.sedeusuario.sede.nombre}}</h3>
+    <h3>Transferencias</h3>
   </div>
   <div class="col-md-6" align="right">
     <br>
-    <a href="{% url 'crear_transferecia'%}" class="btn btn-default">Nueva transferencia</a>
+
+    <a href="{% url 'crear_transferencia_articulo_sede'%}" class="btn btn-default">Nueva Transferencia</a>
   </div>
 </div>
 <hr>
@@ -38,6 +39,7 @@
       <td>{{i.sede_origen}}</td>
       <td>{{i.sede_destino}}</td>
       <td>Q. {{i.descripcion}}</td>
+      <td><a href="#"></a></td>
     </tr>
     {% endfor %}
   </tbody>
