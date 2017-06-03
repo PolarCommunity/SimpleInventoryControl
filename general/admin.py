@@ -1,4 +1,5 @@
-from django.contrib import admin
+from django.c    list_filter = ('user','fecha')
+ontrib import admin
 from .models import *
 # Register your models here.
 class DescripsionArticuloAdmin(admin.TabularInline):
