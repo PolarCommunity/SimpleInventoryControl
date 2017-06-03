@@ -1,0 +1,46 @@
+{% load static %}
+{% load humanize %}
+<head>
+  {% include 'impresioneshead.html' %}
+</head>
+
+<div class="row">
+  <div class="col-md-12">
+    <h3 id="title">Inventario sede: {{request.user.sedeusuario.sede.nombre}}</h3>
+  </div>
+</div>
+<hr>
+<br>
+
+<div id="offset" class="col-md-12">
+
+<table id="table" class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th id="table">#</th>
+      <th id="table">Codigo</th>
+      <th id="table">Nombre</th>
+      <th id="table">Cantidad</th>
+      <th id="table">Precio</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in object_list %}
+    <tr>
+      <td id="table">{{ forloop.counter }}</td>
+      <td id="table">{{i.articulo.codigo}}</td>
+      <td id="table">{{i.articulo.nombre}}</td>
+      <td id="table">{{i.cantidad}}</td>
+      <td id="table">Q. {{i.articulo.precio|intcomma}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    console.log("pendejo");
+    impresion();
+});
+</script>

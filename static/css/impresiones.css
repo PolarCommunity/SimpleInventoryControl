@@ -1,0 +1,29 @@
+@page {
+  size: Letter;
+  margin: 0;
+}
+@media print {
+  html, body {
+    width: 214.0mm;
+    height: 279.0mm;
+  }
+  p {
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration-color: blue;
+  font-size: 11px;
+  }
+  #title{
+    text-align:center;
+  }
+  #table {
+    border: 1px solid black;
+    padding: 0px;
+    font-family: Arial;
+    font-size: 18px;
+  }
+  #offset {
+    margin-left: 25px;
+    margin-right: 25px;
+  }
+table tr th { text-align:left; }
+}

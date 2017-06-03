@@ -11,6 +11,7 @@ urlpatterns = [
 
 
     url(r'^articulo/lista/$', lista_articulo.as_view(), name ="lista_articulo"),
+    url(r'^articulo/lista/impresion/$', imp_inventario, name ="imp_inventario"),
     url(r'^articulo/lista/([\w-]+)$', lista_articulo.as_view(), name ="lista_articulo"),
     url(r'^articulo/crear/$', crear_articulo, name ="crear_articulo"),
     url(r'^articulo/actualizar/(?P<pk>\d+)$', actualizar_articulo, name ="actualizar_articulo"),
@@ -19,6 +20,8 @@ urlpatterns = [
 
     url(r'^articulo/sede/lista/(?P<pk>\d+)$', lista_sede_articulo_super, name ="lista_sede_articulo_super"),
     url(r'^articulo/sede/lista/$', lista_sede_articulo, name ="lista_sede_articulo"),
+    url(r'^articulo/sede/impresion/$', imp_inventario_sede, name ="imp_inventario_sede"),
+
 
     url(r'^transferencia/sedes/lista/$', ListaTransferencia.as_view(), name ="ListaTransferencia"),
 

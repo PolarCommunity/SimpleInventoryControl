@@ -20,4 +20,4 @@ class DetalleIngreso(models.Model):
     cantidad = models.IntegerField()
     precio_unitario = models.DecimalField(max_digits = 12, decimal_places = 2, default=0)
     def __str__(self):
-        return self.ingreso.articulo
+        return self.ingreso.comprobante

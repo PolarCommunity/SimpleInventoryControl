@@ -16,7 +16,7 @@ class IngresoForm(ModelForm):
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-md-4'
         self.helper.field_class = 'col-md-8'
-        self.helper.add_input(Submit('submit', 'Agregar'))
+        self.helper.add_input(Submit('submit', 'Guardar'))
 
 class IngresoDetalleForm(ModelForm):
     class Meta:
@@ -30,4 +30,4 @@ class IngresoDetalleForm(ModelForm):
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-md-4'
         self.helper.field_class = 'col-md-8'
-        self.helper.add_input(Submit('submit', 'Agregar'))
+        self.helper.add_input(Submit('submit', 'Guardar'))
