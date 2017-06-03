@@ -19,5 +19,6 @@ from general import urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^egreso/', include('egresos.urls')),
     url(r'^', include('general.urls')),
 ]

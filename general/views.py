@@ -165,7 +165,7 @@ def crear_articulo(request):
             form.fields['precio'].widget = forms.HiddenInput()
             return render(request, 'general/articulo/articulo_form.html', {'form':form})
     else:
-        return render(request, 'no_permitido.html', {'form':form})
+        return render(request, 'no_permitido.html')
 
 @login_required
 def actualizar_articulo(request, pk):
@@ -202,8 +202,12 @@ def lista_sede_articulo_super(request, pk):
 
 @login_required
 def lista_sede_articulo(request):
-    lista = Sede_Articulo.objects.filter(sede=request.user.sedeusuario.sede)
-    return render(request, 'general/usuarios/lista_sede_articulo.html', {'lista':lista})
+    try:
+        lista = ArticuloSede.objects.filter(sede=request.user.sedeusuario.sede)
+    except Exception as e:
+        print(e)
+        lista=False
+    return render(request, 'general/articulo/lista_sede_articulo.html', {'object_list':lista})
 
 @login_required
 def lista_sede_usuario_super(request, pk):
