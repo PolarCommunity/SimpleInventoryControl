@@ -72,12 +72,8 @@ font-family:  "Times New Roman", Georgia, Serif;
   font-family:  "Times New Roman", Georgia, Serif;
   color: black;
 }
-.footer {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  text-align: center;
+#botoncitos{
+  margin-bottom:100px;
 }
 
 #buttons:hover{

@@ -4,11 +4,11 @@
 {% load crispy_forms_tags %}
 <div >
   <div class="row">
-  <div class="col-md-10">
-      <h1>Ingreso de producto</h1>
+  <div class="col-md-6">
+      <h3>Ingreso de producto</h3>
   </div>
-  <div class="col-md-2">
-      <a  href="{% url 'ListaIngreso'%}"<span class="glyphicon glyphicon-arrow-left"> Regresar </a>
+  <div class="col-md-6" align="right">
+    <a href="{% url 'ListaIngreso'%}" class="btn btn-primary" style="background-color: #f21202"><span class="glyphicon glyphicon-arrow-left"></span> Regresar</a>
   </div>
 </div>
   <form method="post">

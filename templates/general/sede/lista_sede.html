@@ -8,7 +8,9 @@
   </div>
   <div class="col-md-6" align="right">
     <br>
-    <a href="{% url 'crear_sede'%}" class="btn btn-default">Nueva Sede</a>
+    <a href="{% url 'Home'%}" class="btn btn-primary" style="background-color: #f21202"><span class="glyphicon glyphicon-arrow-left"></span> Regresar</a>
+
+    <a href="{% url 'crear_sede'%}" style="background-color: #f21202" class="btn btn-primary">Nueva Sede</a>
   </div>
 </div>
 <hr>
@@ -25,7 +27,6 @@
       <th >#</th>
       <th>Nombre</th>
       <th>Dirección</th>
-      <th>Ver</th>
       <th>Modificar</th>
     </tr>
   </thead>
@@ -35,7 +36,6 @@
       <td>{{ forloop.counter }}</td>
       <td>{{i.nombre}}</td>
       <td>{{i.direccion}}</td>
-      <td><a href="{% url 'detalle_sede' i.pk%}" class="glyphicon glyphicon-eye-open"></a></td>
       <td><a href="{% url 'actualizar_sede' i.pk%}" class="glyphicon glyphicon-pencil"></a></td>
     </tr>
     {% endfor %}
