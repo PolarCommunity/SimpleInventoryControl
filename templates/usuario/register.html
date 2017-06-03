@@ -8,7 +8,7 @@
   <fieldset>
     <legend position="Central">Registro de Usuarios</legend>
    <div class="form-group">
-      <label for="inputEmail" class="col-lg-2 control-label">Nombre de Usuario</label>
+      <label for="inputEmail" class="col-lg-2 control-label required" required="True">Nombre de Usuario<span class="asteriskField">*</span></label>
       <div class="col-lg-10">
         {% csrf_token %}
         <input type="text" class="form-control" id="inputNombredeusuario" placeholder="Nombre de Usuario" name="username">
@@ -17,7 +17,7 @@
 
 
     <div class="form-group">
-      <label for="inputEmail" class="col-lg-2 control-label">Nombres</label>
+      <label for="inputEmail" class="col-lg-2 control-label" required="True">Nombres<span class="asteriskField">*</span></label>
       <div class="col-lg-10">
         {% csrf_token %}
         <input type="text" class="form-control" id="inputNombres" placeholder="Nombres" name="nombres">
@@ -25,7 +25,7 @@
     </div>
 
     <div class="form-group">
-      <label for="inputEmail" class="col-lg-2 control-label">Apellidos</label>
+      <label for="inputEmail" class="col-lg-2 control-label" required="True">Apellidos<span class="asteriskField">*</span></label>
       <div class="col-lg-10">
         {% csrf_token %}
         <input type="text" class="form-control" id="inputApellidos" placeholder="Apellidos" name=apellidos>
@@ -39,7 +39,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="inputPassword" class="col-lg-2 control-label">Contraseña</label>
+      <label for="inputPassword" class="col-lg-2 control-label" required="True">Contraseña<span class="asteriskField">*</span></label>
       <div class="col-lg-10">
         {% csrf_token %}
         <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password">
@@ -48,7 +48,7 @@
     </div>
 
     	<div class="form-group">
-      <label class="col-md-2 control-label">Sede</label>
+      <label class="col-md-2 control-label" required="True">Sede<span class="asteriskField">*</span></label>
       <div class="col-md-10">
         {% csrf_token %}
         <select class="select form-control" id="id_sede" name="sede">
@@ -62,7 +62,7 @@
 
     <div class="form-group" align="center">
       <div class="col-lg-10 col-lg-offset-2">
-        <button type="reset" class="btn btn-default">Cancelar</button>
+        <a href="{% url 'lista_usuario'%}" class="btn btn-default">Cancelar</a>
         <button type="submit" class="btn btn-primary">Guardar</button>
       </div>
     </div>
@@ -70,7 +70,7 @@
 </form>
 
 {% if mensaje %}
-<div align="center">  
+<div align="center">
   <h5>{{mensaje}}</h5>
 </div>
 {% endif %}
