@@ -15,12 +15,20 @@ class ArticuloAdmin(admin.ModelAdmin):
         DescripsionArticuloAdmin,
         SedeArticuloAdmin,
     ]
+    list_display = ['codigo','nombre','cantidad','precio']
+    ordering = ['codigo']
+    search_fields = ['codigo','nombre']
+
 
 class SedeAdmin(admin.ModelAdmin):
     inlines = [
         SedeUsuarioAdmin,
         SedeArticuloAdmin,
     ]
+    list_display = ['nombre','direccion']
+    ordering = ['nombre']
+    search_fields = ['nombre','direccion']
+
 
 
 admin.site.register(Articulo,ArticuloAdmin)

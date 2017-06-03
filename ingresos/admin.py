@@ -8,5 +8,12 @@ class IngresoAdmin(admin.ModelAdmin):
     inlines = [
         DetalleIngresaAdmin,
     ]
+    list_display = ['comprobante','fecha','total','user']
+    ordering = ['comprobante']
+    date_hierarchy = 'fecha'
+    list_filter = ('user','fecha')
+    search_fields = ['comprobante']
+
+
 
 admin.site.register(Ingreso, IngresoAdmin)
