@@ -68,7 +68,7 @@ def Logout(request):
 
 class lista_usuario(LoginRequiredMixin, ListView):
     model = User
-    paginate_by = 50
+    paginate_by = 20
     login_url = settings.LOGIN_URL
     template_name = 'general/usuario/lista_sede_usuario.html'
     def get_queryset(self):
@@ -79,7 +79,7 @@ class lista_usuario(LoginRequiredMixin, ListView):
 
 class lista_sede(LoginRequiredMixin, ListView):
     model = Sede
-    paginate_by = 50
+    paginate_by = 20
     login_url = settings.LOGIN_URL
     template_name = 'general/sede/lista_sede.html'
     def get_queryset(self):
@@ -133,7 +133,7 @@ class detalle_sede(LoginRequiredMixin, DetailView):
 
 class lista_articulo(LoginRequiredMixin, ListView):
     model = Articulo
-    paginate_by = 50
+    paginate_by = 20
     login_url = settings.LOGIN_URL
     template_name = 'general/articulo/lista_articulo.html'
     def get_queryset(self):
