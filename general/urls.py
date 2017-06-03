@@ -23,7 +23,10 @@ urlpatterns = [
     url(r'^articulo/sede/impresion/$', imp_inventario_sede, name ="imp_inventario_sede"),
 
 
-    url(r'^transferencia/sedes/lista/$', ListaTransferencia.as_view(), name ="ListaTransferencia"),
+    url(r'^transferencia/sedes/lista/(?P<par>\w+)$', lista_transferencia, name ="lista_transferencia"),
+    url(r'^transferencia/sedes/lista/$', lista_transferencia, name ="lista_transferencia"),
+    url(r'^transferencia/sedes/crear/$', crear_transferencia_articulo_sede, name ="crear_transferencia_articulo_sede"),
+    url(r'^transferencia/sedes/detalle/crear/(?P<pk>\w+)$', crear_detalle_transferencia_articulo_sede, name ="crear_detalle_transferencia_articulo_sede"),
 
 
     url(r'^usuario/lista/$', lista_usuario.as_view(), name ="lista_usuario"),

@@ -22,7 +22,14 @@
     <form method="post">
       {% csrf_token %}
       {% crispy form %}
+      <hr>
+      <p style="color:black">.</p>
     </form>
+    {% if mensaje %}
+    <div class="alert alert-warning" role="alert">
+        {{mensaje}}
+    </div>
+    {% endif %}
   </div>
   </div>
   <script type="text/javascript" src="{% static "js/espacioboton.js"%}"></script>

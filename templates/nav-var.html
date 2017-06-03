@@ -37,7 +37,7 @@
 {% else%}
 <a href="{% url 'lista_egreso_sede'%}" class="btn btn-default" id="menubtn" style="background-color: #ffcc00">Egresos</a>
 {% endif %}
-<a href="{%url 'ListaTransferencia'%}" class="btn btn-default" id="menubtn" style="background-color: #ffcc00">Transferencias</a>
+<a href="{%url 'lista_transferencia'%}" class="btn btn-default" id="menubtn" style="background-color: #ffcc00">Transferencias</a>
 <a href="{%url 'ListaIngreso'%}" class="btn btn-default" id="menubtn" style="background-color: #ffcc00">Ingresos</a>
 {% if request.user.is_superuser%}
     <div class="btn-group">
