@@ -40,7 +40,7 @@
       <td>{{i.sede_origen}}</td>
       <td>{{i.sede_destino}}</td>
       <td>{{i.descripcion}}</td>
-      <td><a href="#" class="glyphicon glyphicon-eye-open"></a></td>
+      <td><a href="{% url 'ver_detalle_transferencia' i.pk%}" class="glyphicon glyphicon-eye-open"></a></td>
     </tr>
     {% endfor %}
   </tbody>

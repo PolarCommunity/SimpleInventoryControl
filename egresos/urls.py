@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^super/lista/([\w-]+)$', lista_egreso_super.as_view(), name ="lista_egreso_super"),
     url(r'^sede/crear/$', crear_egreso, name ="crear_egreso"),
     url(r'^sede/detalle/crear/(?P<pk>\d+)$', crear_detalle_egreso, name ="crear_detalle_egreso"),
+    url(r'^sede/detalle/eliminar/(?P<pk>\d+)$', eliminar_detalle_egreso, name ="eliminar_detalle_egreso"),
 
 ]

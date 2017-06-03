@@ -9,8 +9,12 @@
       <h1>Transferencia</h1>
     </div>
     <div class="col-md-6" align="right">
+<<<<<<< HEAD
           <a href="{% url 'lista_transferencia'%}" class="btn btn-primary" style="background-color: #f21202"><span class="glyphicon glyphicon-arrow-left"></span> Regresar</a>
           <a href="{% url 'imp_transferencia' transferencia.pk%}" class="btn btn-primary" style="background-color: #f21202"><span class="glyphicon glyphicon-print"></span> Imprimir</a>
+=======
+        <a  href="{% url 'lista_transferencia'%}"><span class="glyphicon glyphicon-arrow-left"> Regresar </a>
+>>>>>>> transferencias
     </div>
   </div>
   <hr>
@@ -26,6 +30,7 @@
   </div>
   </div>
   <hr>
+  {% if form %}
   <form method="post">
     {% csrf_token %}
     {% crispy form%}
@@ -38,6 +43,7 @@
     <p style="color:black">.</p>
     {% endif %}
   </form>
+  {% endif %}
 </div>
 <div>
 <table class="table table-striped table-hover">
@@ -48,6 +54,9 @@
     <th>Nombre</th>
     <th>Cantidad</th>
     <th>Precio Unitario</th>
+    {% if form %}
+    <th>Eliminar</th>
+    {% endif %}
   </tr>
 </thead>
 <tbody>
@@ -58,7 +67,9 @@
   <td>{{i.articulo.articulo.nombre}}</td>
   <td>{{i.cantidad}}</td>
   <td>Q. {{i.articulo.articulo.precio|intcomma}}</td>
-  <td><a class="confirm-delete"  href="#"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+  {% if form %}
+  <td><a class="confirm-delete"  href="{% url 'eliminar_detalle_transferencia' i.pk%}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+  {% endif %}
   </tr>
 {% endfor %}
 </tbody>

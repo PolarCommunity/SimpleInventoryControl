@@ -61,6 +61,9 @@
     <th>Cantidad</th>
     <th>Precio Unitario</th>
     <th>Total</th>
+    {% if form %}
+    <th>Eliminar</th>
+    {% endif %}
   </tr>
 </thead>
 <tbody>
@@ -72,7 +75,9 @@
   <td>{{i.cantidad}}</td>
   <td>Q. {{i.articulo.articulo.precio|intcomma}}</td>
   <td>Q. {{i.total|intcomma}}</td>
-  <td><a  href="#"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></td>
+  {% if form %}
+  <td><a  href="{% url 'eliminar_detalle_egreso' i.pk%}" class="confirm-delete"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+  {% endif %}
   </tr>
 {% endfor %}
 </tbody>

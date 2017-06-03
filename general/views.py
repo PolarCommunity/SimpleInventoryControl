@@ -143,8 +143,12 @@ class lista_articulo(LoginRequiredMixin, ListView):
             return super(lista_articulo, self).get_queryset().order_by('nombre')
 
 class detalle_articulo(LoginRequiredMixin, DetailView):
-    model = Articulo
+    model = ArticuloSede
     template_name = 'general/articulo/detalle_articulo.html'
+
+class detalle_articulo_super(LoginRequiredMixin, DetailView):
+    model = Articulo
+    template_name = 'general/articulo/detalle_articulo_super.html'
 
 @login_required
 def crear_articulo(request):
@@ -260,10 +264,20 @@ def crear_detalle_transferencia_articulo_sede(request, pk):
         form = CrearDetalleTransferenciaForm(request.POST)
         sede_articulo = ArticuloSede.objects.get(pk=request.POST['articulo'])
         articulo = Articulo.objects.get(pk=sede_articulo.articulo.pk)
+        try:
+            for i in lista:
+                if i.articulo.pk == int(request.POST['articulo']):
+                    mensaje = "Ya ha ingresado este artículo"
+                    form.fields['transferencia'].widget = forms.HiddenInput()
+                    form.fields['articulo'].queryset = ArticuloSede.objects.filter(sede=Sede.objects.get(pk=transferencia.sede_origen.pk))
+                    return render(request, 'general/transferencia/detalle_transferencia_form.html', {'form':form, 'transferencia':transferencia, 'lista':lista, 'mensaje':mensaje})
+        except Exception as e:
+            raise
         if form.is_valid():
             if int(request.POST['cantidad']) > sede_articulo.cantidad:
                 mensaje = "No cuenta con la cantidad suficiente de este artículo"
                 form.fields['transferencia'].widget = forms.HiddenInput()
+                form.fields['articulo'].queryset = ArticuloSede.objects.filter(sede=Sede.objects.get(pk=transferencia.sede_origen.pk))
                 return render(request, 'general/transferencia/detalle_transferencia_form.html', {'form':form, 'transferencia':transferencia, 'lista':lista, 'mensaje':mensaje})
             detalle = form.save()
             try:
@@ -273,7 +287,7 @@ def crear_detalle_transferencia_articulo_sede(request, pk):
             except Exception as e:
                 print(articulo.nombre)
                 try:
-                    sede_articulo_aumentar = ArticuloSede.objects.create(cantidad=Decimal(request.POST['cantidad']), articulo=articulo, sede=Sede.objects.get(pk=transferencia.sede_destino))
+                    sede_articulo_aumentar = ArticuloSede.objects.create(cantidad=Decimal(request.POST['cantidad']), articulo=articulo, sede=Sede.objects.get(pk=transferencia.sede_destino.pk))
                 except Exception as e:
                     print(e)
             sede_articulo.cantidad -= detalle.cantidad
@@ -285,6 +299,27 @@ def crear_detalle_transferencia_articulo_sede(request, pk):
         form.fields['articulo'].queryset = ArticuloSede.objects.filter(sede=Sede.objects.get(pk=transferencia.sede_origen.pk))
         return render(request, 'general/transferencia/detalle_transferencia_form.html', {'form':form, 'transferencia':transferencia, 'lista':lista})
 
+@login_required
+def eliminar_detalle_transferencia(request, pk):
+    detalle = get_object_or_404(DetalleTransferenciaArticuloSede, pk=pk)
+    transferencia = TransferenciaArticuloSede.objects.get(pk=detalle.transferencia.pk)
+    articulo_origen = ArticuloSede.objects.get(pk=detalle.articulo.pk)
+    articulo_origen.cantidad += detalle.cantidad
+    articulo_origen.save()
+    articulo_destino = ArticuloSede.objects.get(articulo = Articulo.objects.get(pk=detalle.articulo.articulo.pk), sede=detalle.transferencia.sede_destino)
+    articulo_destino.cantidad -= detalle.cantidad
+    articulo_destino.save()
+    detalle.delete()
+    return redirect(reverse('crear_detalle_transferencia_articulo_sede', args={transferencia.pk}))
+
+@login_required
+def ver_detalle_transferencia(request, pk):
+    transferencia = get_object_or_404(TransferenciaArticuloSede, pk=pk)
+    try:
+        lista = DetalleTransferenciaArticuloSede.objects.filter(transferencia=transferencia)
+    except Exception as e:
+        lista = False
+    return render(request, 'general/transferencia/detalle_transferencia_form.html', {'transferencia':transferencia, 'lista':lista})
 
 @login_required
 def imp_inventario_sede(request):

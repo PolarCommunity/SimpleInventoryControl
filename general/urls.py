@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^articulo/lista/([\w-]+)$', lista_articulo.as_view(), name ="lista_articulo"),
     url(r'^articulo/crear/$', crear_articulo, name ="crear_articulo"),
     url(r'^articulo/actualizar/(?P<pk>\d+)$', actualizar_articulo, name ="actualizar_articulo"),
+    url(r'^articulo/ver/super/(?P<pk>\d+)$', detalle_articulo_super.as_view(), name ="detalle_articulo_super"),
     url(r'^articulo/ver/(?P<pk>\d+)$', detalle_articulo.as_view(), name ="detalle_articulo"),
     url(r'^articulo/sede/lista/seleccion/$', seleccion_sede_lista_articulo, name="seleccion_sede_lista_articulo"),
 
@@ -29,7 +30,9 @@ urlpatterns = [
     url(r'^transferencia/sedes/impresion/(?P<pk>\d+)$', imp_transferencia, name ="imp_transferencia"),
 
     url(r'^transferencia/sedes/crear/$', crear_transferencia_articulo_sede, name ="crear_transferencia_articulo_sede"),
+    url(r'^transferencia/sedes/detalle/ver/(?P<pk>\w+)$', ver_detalle_transferencia, name ="ver_detalle_transferencia"),
     url(r'^transferencia/sedes/detalle/crear/(?P<pk>\w+)$', crear_detalle_transferencia_articulo_sede, name ="crear_detalle_transferencia_articulo_sede"),
+    url(r'^transferencia/sedes/detalle/eliminar/(?P<pk>\w+)$', eliminar_detalle_transferencia, name ="eliminar_detalle_transferencia"),
 
 
     url(r'^usuario/lista/$', lista_usuario.as_view(), name ="lista_usuario"),
