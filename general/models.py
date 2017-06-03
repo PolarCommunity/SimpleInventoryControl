@@ -10,7 +10,7 @@ class Articulo(models.Model):
     cantidad = models.DecimalField(max_digits = 12, decimal_places = 2, default=0)
     precio = models.DecimalField(max_digits = 12, decimal_places = 2, default=0)
     def __str__(self):
-        return self.nombre
+        return (self.codigo + " - " + self.nombre)
 
 class DescripcionArticulo(models.Model):
     descripcion = models.CharField(max_length=254)
@@ -29,7 +29,7 @@ class ArticuloSede(models.Model):
     articulo = models.ForeignKey(Articulo, on_delete=models.CASCADE)
     sede = models.ForeignKey(Sede, on_delete=models.CASCADE)
     def __str__(self):
-        art = self.sede.nombre + self.articulo.nombre
+        art = str(self.sede.nombre) + " - " + str(self.articulo.nombre)
         return art
 
 class SedeUsuario(models.Model):

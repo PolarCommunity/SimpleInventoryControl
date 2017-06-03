@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block container %}
+<div>
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Egreso</h1>
+    </div>
+    <div class="col-md-6" align="right">
+        <a  href="{% url 'lista_egreso_sede'%}"><span class="glyphicon glyphicon-arrow-left"> Regresar </a>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+  <div class="col-md-6">
+    <h4>Egreso No: {{egreso.pk}}</h4>
+    <h4>Fecha: {{egreso.fecha}}</h4>
+    <h4>Descripción: {{egreso.descripcion}}</h4>
+  </div>
+  <div class="col-md-6">
+    <h4>Sede: {{egreso.sede}}</h4>
+    <h4>Usuario: {{egreso.user}}</h4>
+    {% if form%}
+    <h4>Total: Q. {{egreso.total|intcomma}}</h4>
+    {% endif %}
+  </div>
+  </div>
+  {% if form %}
+  <hr>
+  <form method="post">
+    {% csrf_token %}
+    {% crispy form%}
+    {% if mensaje %}
+    <div align="center">
+      <br>
+      <h4>{{mensaje}}</h4>
+    </div>
+    {% else %}
+    <p style="color:black">.</p>
+    {% endif %}
+  </form>
+  {% else %}
+  <h3>Total: {{egreso.totall|intcomma}}</h3>
+  {% endif %}
+</div>
+<div>
+<table class="table table-striped table-hover">
+<thead>
+  <tr>
+    <th >#</th>
+    <th>Codigo</th>
+    <th>Nombre</th>
+    <th>Cantidad</th>
+    <th>Precio Unitario</th>
+    <th>Total</th>
+  </tr>
+</thead>
+<tbody>
+  {% for i in lista %}
+  <tr>
+  <td>{{ forloop.counter }}</td>
+  <td>{{i.articulo.articulo.codigo}}</td>
+  <td>{{i.articulo.articulo.nombre}}</td>
+  <td>{{i.cantidad}}</td>
+  <td>Q. {{i.articulo.articulo.precio|intcomma}}</td>
+  <td>Q. {{i.total|intcomma}}</td>
+  <td><a  href="#"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></td>
+  </tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+
+{% endblock %}
