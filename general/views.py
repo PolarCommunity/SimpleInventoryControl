@@ -195,8 +195,8 @@ def actualizar_articulo(request, pk):
 @login_required
 def lista_sede_articulo_super(request, pk):
     if request.user.is_superuser:
-        lista = Sede_Articulo.objects.filter(sede=pk)
-        return render(request, 'general/lista_sede_articulo.html', {'lista':lista})
+        lista = ArticuloSede.objects.filter(sede=pk)
+        return render(request, 'general/articulo/lista_sede_articulo.html', {'object_list':lista})
     else:
         return render(request, 'no_permitido.html')
 
