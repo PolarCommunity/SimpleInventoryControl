@@ -133,7 +133,7 @@ class detalle_sede(LoginRequiredMixin, DetailView):
 
 class lista_articulo(LoginRequiredMixin, ListView):
     model = Articulo
-    paginate_by = 20
+    paginate_by = 50
     login_url = settings.LOGIN_URL
     template_name = 'general/articulo/lista_articulo.html'
     def get_queryset(self):
