@@ -17,3 +17,17 @@ class IngresoForm(ModelForm):
         self.helper.label_class = 'col-md-4'
         self.helper.field_class = 'col-md-8'
         self.helper.add_input(Submit('submit', 'Agregar'))
+
+class IngresoDetalleForm(ModelForm):
+    class Meta:
+        model = DetalleIngreso
+        fields = '__all__'
+    def __init__(self, *args, **kwargs):
+        super(IngresoDetalleForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.fields['precio_total'].widget = forms.HiddenInput()
+        self.fields['ingreso'].widget = forms.HiddenInput()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-md-4'
+        self.helper.field_class = 'col-md-8'
+        self.helper.add_input(Submit('submit', 'Agregar'))

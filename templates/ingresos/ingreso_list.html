@@ -37,11 +37,13 @@
     <td>{{i.comprobante}}</td>
     <td>{{i.user}}</td>
     <td>Q. {{i.total|intcomma}}</td>
-    <td><a  href="#"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a></td>
+    <td><a class="confirm-delete"  href="{%url 'crear_detalle_ingreso' i.pk%}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a></td>
   </tr>
   {% endfor %}
 </tbody>
 </table>
 {% endif %}
 <hr>
+{%include 'paginate.html'%}
+
 {% endblock %}

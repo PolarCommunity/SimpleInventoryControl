@@ -30,6 +30,7 @@ class ArticuloSede(models.Model):
     sede = models.ForeignKey(Sede, on_delete=models.CASCADE)
     def __str__(self):
         art = self.sede.nombre + self.articulo.nombre
+        return art
 
 class SedeUsuario(models.Model):
     user = models.OneToOneField(User)

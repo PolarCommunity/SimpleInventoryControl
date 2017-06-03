@@ -1,0 +1,80 @@
+{% extends 'base.html'%}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block container %}
+{% load humanize%}
+<div>
+    <div class="row">
+      <div class="col-md-10">
+          <h1>Detalle de ingreso</h1>
+      </div>
+      <div class="col-md-2">
+          <a  href="{% url 'ListaIngreso' %}"<span class="glyphicon glyphicon-arrow-left"> Regresar </a>
+      </div>
+    </div>
+    <hr>
+
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Fecha: {{ingreso.fecha}}</h4>
+        <h4>Total: Q. {{ingreso.total|intcomma}}</h4>
+        <h4>Comprobante: {{ingreso.comprobante}}</h4>
+      </div>
+      <div class="col-md-6">
+        <h4>Usuario receptor: {{ingreso.user}}</h4>
+        <h4>Descripción: {{ingreso.descripcion}}</h4>
+      </div>
+    </div>
+
+</div>
+{%if mensaje%}
+  <hr>
+  {%if status == 1%}
+    <div class="alert alert-warning" role="alert">
+        {{mensaje}}
+    </div>
+  {%else%}
+    <div class="alert alert-danger" role="alert">
+        {{mensaje}}
+    </div>
+  {%endif%}
+{%endif%}
+<hr>
+<div>
+  <form method="post">
+    {% csrf_token %}
+    {%crispy form%}
+
+    <p style="color:black">.</p>
+  </form>
+</div>
+
+<hr>
+
+<div>
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Articulo</th>
+      <th>Cantidad</th>
+      <th>Precio Unitario</th>
+      <th>Total</th>
+      <th>Eliminar</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in detalles %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{i.articulo}}</td>
+      <td>{{i.cantidad}}</td>
+      <td>Q. {{i.precio_unitario|intcomma}}</td>
+      <td>Q. {{i.precio_total|intcomma}}</td>
+      <td><a class="confirm-delete" href="{% url 'eliminar_detalle_ingreso' i.pk %}" ><span class="glyphicon glyphicon-trash"></a></td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}
