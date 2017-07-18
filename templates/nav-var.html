@@ -1,4 +1,7 @@
 {% load static %}
+
+<div>
+
 <nav class="navbar navbar-default" style="background-color: #f21202" style="margin-bottom: 0px;">
   <div class="container-fluid">
     <div class="navbar-header" style="background-color: #f21202">
@@ -16,40 +19,40 @@
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a style="color: black" href="{% url 'Logout'%}">Cerrar Sesión</a></li>
+        <li><a style="color: black; font-family: Arial,Helvetica Neue,Helvetica,sans-serif;" href="{% url 'Logout'%}">Cerrar Sesión</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a style="color: black" href="#">{{request.user.username}}</a></li>
+        <li><a style="color: black; font-family: Arial,Helvetica Neue,Helvetica,sans-serif;" href="#">{{request.user.username}}</a></li>
       </ul>
     </div>
   </div>
 
 <div class="btn-group btn-group-justified" style="margin-top: 0px;">
   {% if request.user.is_superuser%}
-  <a href="{% url 'seleccion_sede_lista_articulo'%}" id="menubtn" class="btn btn-default" style="background-color: #ffe900">Inventario</a>
+  <a href="{% url 'seleccion_sede_lista_articulo'%}"  id="menubtn" class="btn btn-default" style="background-color: #ffe900; font-family: Arial,Helvetica Neue,Helvetica,sans-serif;"> Inventario</a>
   {% else %}
-<a href="{% url 'lista_sede_articulo'%}" id="menubtn" class="btn btn-default" style="background-color: #ffe900">Inventario</a>
+<a href="{% url 'lista_sede_articulo'%}" id="menubtn" class="btn btn-default" style="background-color: #ffe900; font-family: Arial,Helvetica Neue,Helvetica,sans-serif;">Inventario</a>
   {% endif %}
 {% if request.user.is_superuser%}
-<a href="{% url 'lista_egreso_super'%}" class="btn btn-default" id="menubtn" style="background-color: #ffe900">Egresos</a>
+<a href="{% url 'lista_egreso_super'%}" class="btn btn-default" id="menubtn" style="background-color: #ffe900; font-family: Arial,Helvetica Neue,Helvetica,sans-serif;">Egresos</a>
 {% else%}
-<a href="{% url 'lista_egreso_sede'%}" class="btn btn-default" id="menubtn" style="background-color: #ffe900">Egresos</a>
+<a href="{% url 'lista_egreso_sede'%}" class="btn btn-default" id="menubtn" style="background-color: #ffe900; font-family: Arial,Helvetica Neue,Helvetica,sans-serif;">Egresos</a>
 {% endif %}
-<a href="{%url 'lista_transferencia'%}" class="btn btn-default" id="menubtn" style="background-color: #ffe900">Transferencias</a>
+<a href="{%url 'lista_transferencia'%}" class="btn btn-default" id="menubtn" style="background-color: #ffe900; font-family: Arial,Helvetica Neue,Helvetica,sans-serif;">Transferencias</a>
 {% if request.user.is_superuser%}
 
-<a href="{%url 'ListaIngreso'%}" class="btn btn-default" id="menubtn" style="background-color: #ffe900">Ingresos</a>
+<a href="{%url 'ListaIngreso'%}" class="btn btn-default" id="menubtn" style="background-color: #ffe900; font-family: Arial,Helvetica Neue,Helvetica,sans-serif;">Ingresos</a>
 {% endif %}
 
 {% if request.user.is_superuser%}
-    <div class="btn-group">
-      <a href="#" class="btn btn-default dropdown-toggle" id="menubtn" id="dropdow" data-toggle="dropdown" style="background-color: #ffe900">
+    <div class="btn-group" >
+      <a href="#" class="btn btn-default dropdown-toggle" id="menubtn" id="dropdow" data-toggle="dropdown" style="background-color: #ffe900; font-family: Arial,Helvetica Neue,Helvetica,sans-serif;">
         Administrativo
         <span class="caret"></span>
       </a>
       <ul class="dropdown-menu">
-        <li><a href="{% url 'lista_sede'%}" id="menubtn" style="color: #FFFFFF">Sedes</a></li>
-        <li><a href="{% url 'lista_usuario'%}" id="menubtn" style="color: #FFFFFF">Usuarios</a></li>
+        <li><a href="{% url 'lista_sede'%}" id="menubtn" style="color: #FFFFFF; font-family: Arial,Helvetica Neue,Helvetica,sans-serif;">Sedes</a></li>
+        <li><a href="{% url 'lista_usuario'%}" id="menubtn" style="color: #FFFFFF; font-family: Arial,Helvetica Neue,Helvetica,sans-serif;">Usuarios</a></li>
        </ul>
     </div>
 {% endif %}
@@ -57,3 +60,4 @@
 
 </div>
 </nav>
+</div>

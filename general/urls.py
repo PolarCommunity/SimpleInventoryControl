@@ -19,8 +19,11 @@ urlpatterns = [
     url(r'^articulo/ver/(?P<pk>\d+)$', detalle_articulo.as_view(), name ="detalle_articulo"),
     url(r'^articulo/sede/lista/seleccion/$', seleccion_sede_lista_articulo, name="seleccion_sede_lista_articulo"),
 
-    url(r'^articulo/sede/lista/(?P<pk>\d+)$', lista_sede_articulo_super, name ="lista_sede_articulo_super"),
+    url(r'^articulo/sede/lista/(?P<pk>\d+)/(?P<id>\w+)$', lista_sede_articulo_super, name ="lista_sede_articulo_super"),
+    url(r'^articulo/sede/lista/(?P<pk>\d+)/$', lista_sede_articulo_super, name ="lista_sede_articulo_super"),
+    url(r'^articulo/sede/lista/(?P<id>\w+)$', lista_sede_articulo, name ="lista_sede_articulo"),
     url(r'^articulo/sede/lista/$', lista_sede_articulo, name ="lista_sede_articulo"),
+
     url(r'^articulo/sede/impresion/$', imp_inventario_sede, name ="imp_inventario_sede"),
 
 

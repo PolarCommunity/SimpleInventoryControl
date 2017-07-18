@@ -202,20 +202,22 @@ def actualizar_articulo(request, pk):
         return render(request, 'no_permitido.html')
 
 @login_required
-def lista_sede_articulo_super(request, pk):
+def lista_sede_articulo_super(request, pk, id=""):
     if request.user.is_superuser:
-        lista = ArticuloSede.objects.filter(sede=pk)
+        try:
+            lista = ArticuloSede.objects.filter(Q(articulo__nombre__icontains=id)|Q(articulo__codigo__icontains=id), sede=pk)
+        except Exception as e:
+            lista = ArticuloSede.objects.filter(sede=pk)
         return render(request, 'general/articulo/lista_sede_articulo.html', {'object_list':lista})
     else:
         return render(request, 'no_permitido.html')
 
 @login_required
-def lista_sede_articulo(request):
+def lista_sede_articulo(request, id=""):
     try:
-        lista = ArticuloSede.objects.filter(sede=request.user.sedeusuario.sede)
+        lista = ArticuloSede.objects.filter(Q(articulo__nombre__icontains=id)|Q(articulo__codigo__icontains=id), sede=request.user.sedeusuario.sede)
     except Exception as e:
-        print(e)
-        lista=False
+        lista = ArticuloSede.objects.filter(sede=request.user.sedeusuario.sede)
     return render(request, 'general/articulo/lista_sede_articulo.html', {'object_list':lista})
 
 @login_required

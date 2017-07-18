@@ -74,7 +74,7 @@ def crear_detalle_egreso(request, pk):
         except Exception as e:
             raise
         articulosede = ArticuloSede.objects.get(pk = int(request.POST['articulo']))
-        articulo = Articulo.objects.get(pk=int(request.POST['articulo']))
+        articulo = Articulo.objects.get(pk=articulosede.articulo.pk)
         if form.is_valid():
             if Decimal(request.POST['cantidad']) > articulosede.cantidad:
                 mensaje = "No cuenta con la cantidad suficiente de este artículo, usted tiene: " + str(articulosede.cantidad)
